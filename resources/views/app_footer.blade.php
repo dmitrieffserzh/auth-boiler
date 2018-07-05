@@ -1,5 +1,6 @@
-<footer class="footer mt-4">
+<footer class="footer">
     <div class="container">
-        2018 &copy; All rights reserved.
+        <p>&copy; {{ date('Y') }} All rights reserved</p>
+        <span class="made_in">MADE WITH LOVE <a href="https://vk.com/dmitrieffserzh" title="dmitrieffserzh">DMITRIEFFSERZH</a></span>
     </div>
 </footer>

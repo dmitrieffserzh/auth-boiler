@@ -30,7 +30,7 @@ body {
   left: 0;
   right: 0;
   //background: #3c65a2;
-  background: linear-gradient(135deg,#4854a2,#772088);
+  background: linear-gradient(90deg, #00a9e2, #007ae0);
   width: 100%;
   height: 3rem;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
@@ -40,16 +40,31 @@ body {
 
 // FOOTER >> ==========================================================================================================/
 .footer {
-  font-size: 13px;
-  color: #a3a7b3;
-  line-height: 2.5rem;
+  padding: 1rem 0;
+  color: #aeb2bf;
+  line-height: 1rem;
+  & p {
+    margin: 0;
+    font-size: .85rem;
+  }
+  & .made_in {
+    display: inline-block;
+    font-size: .5rem;
+    letter-spacing: .05rem;
+    transition: color .3s;
+    & a {
+      color: inherit;
+    }
+    &:hover {
+      color: #00c2ff;
+    }
+  }
 }
 
 
 // CONTENT >> =========================================================================================================/
 #content {
   background: #fff;
-  //box-shadow: 0rem 0.25rem 0.5rem rgba(64, 98, 134, 0.05);
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
   border-radius: .2rem;
   & .main {
@@ -63,7 +78,7 @@ body {
 }
 
 
-// WIDGETS >> ========================================================================================================//
+// WIDGETS >> =========================================================================================================/
 .auth-menu {
   display: inline-block;
   float: right;
@@ -85,7 +100,17 @@ body {
   }
 }
 
-// HELPERS >> ========================================================================================================//
+// HELPERS >> =========================================================================================================/
 .icon {
   float: left;
+}
+
+
+
+
+// MEDIA QUERIES >> ===================================================================================================/
+@media (max-width: 800px) {
+  #content .main {
+    border: none;
+  }
 }

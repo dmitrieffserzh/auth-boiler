@@ -46,9 +46,9 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  color: #415365;
   text-align: left;
-  background-color: #fbfcff;
+  background-color: #fafafa;
 }
 
 [tabindex="-1"]:focus {
@@ -2940,7 +2940,8 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(135deg, #4854a2, #772088);
+  background: -webkit-gradient(linear, left top, right top, from(#00a9e2), to(#007ae0));
+  background: linear-gradient(90deg, #00a9e2, #007ae0);
   width: 100%;
   height: 3rem;
   -webkit-box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
@@ -2949,9 +2950,30 @@ body {
 }
 
 .footer {
-  font-size: 13px;
-  color: #a3a7b3;
-  line-height: 2.5rem;
+  padding: 1rem 0;
+  color: #aeb2bf;
+  line-height: 1rem;
+}
+
+.footer p {
+  margin: 0;
+  font-size: .85rem;
+}
+
+.footer .made_in {
+  display: inline-block;
+  font-size: .5rem;
+  letter-spacing: .05rem;
+  -webkit-transition: color .3s;
+  transition: color .3s;
+}
+
+.footer .made_in a {
+  color: inherit;
+}
+
+.footer .made_in:hover {
+  color: #00c2ff;
 }
 
 #content {
@@ -2998,5 +3020,11 @@ body {
 
 .icon {
   float: left;
+}
+
+@media (max-width: 800px) {
+  #content .main {
+    border: none;
+  }
 }
 
