@@ -50,13 +50,11 @@ body {
   }
   & .made_in {
     display: inline-block;
+    color: inherit;
     font-size: .5rem;
     font-weight: 600;
     letter-spacing: .05rem;
     transition: color .3s;
-    & a {
-      color: inherit;
-    }
     &:hover {
       color: #009fff;
     }
