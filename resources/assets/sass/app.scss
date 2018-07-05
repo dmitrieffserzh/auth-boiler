@@ -42,6 +42,7 @@ body {
 .footer {
   padding: 1rem 0;
   color: #aeb2bf;
+  text-shadow: 1px 1px 0 #fff;
   line-height: 1rem;
   & p {
     margin: 0;
@@ -50,13 +51,14 @@ body {
   & .made_in {
     display: inline-block;
     font-size: .5rem;
+    font-weight: 600;
     letter-spacing: .05rem;
     transition: color .3s;
     & a {
       color: inherit;
     }
     &:hover {
-      color: #00c2ff;
+      color: #009fff;
     }
   }
 }

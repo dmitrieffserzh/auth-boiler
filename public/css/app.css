@@ -2952,6 +2952,7 @@ body {
 .footer {
   padding: 1rem 0;
   color: #aeb2bf;
+  text-shadow: 1px 1px 0 #fff;
   line-height: 1rem;
 }
 
@@ -2963,6 +2964,7 @@ body {
 .footer .made_in {
   display: inline-block;
   font-size: .5rem;
+  font-weight: 600;
   letter-spacing: .05rem;
   -webkit-transition: color .3s;
   transition: color .3s;
@@ -2973,7 +2975,7 @@ body {
 }
 
 .footer .made_in:hover {
-  color: #00c2ff;
+  color: #009fff;
 }
 
 #content {
