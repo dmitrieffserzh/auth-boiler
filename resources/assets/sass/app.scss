@@ -99,6 +99,21 @@ body {
     }
   }
 }
+.auth {
+  &-social {
+    display: inline-block;
+    padding: .5rem 1rem;
+    border-radius: .2rem;
+   // background: linear-gradient(150deg, #5364f9, #bc00e0);
+    background: #1178d2;
+    color: #fff;
+    transition: background 0.3s;
+    &:hover {
+      background: #007bff;
+      color: #fff;
+    }
+  }
+}
 
 // HELPERS >> =========================================================================================================/
 .icon {

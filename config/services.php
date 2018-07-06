@@ -35,4 +35,16 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+	// Social auth
+    'facebook' => [
+	    'client_id' => env('FB_CLIENT_ID'),
+	    'client_secret' => env('FB_CLIENT_SECRET'),
+	    'redirect' => env('FB_REDIRECT')
+    ],
+
+    'vkontakte' => [
+	    'client_id' => env('VKONTAKTE_KEY'),
+	    'client_secret' => env('VKONTAKTE_SECRET'),
+	    'redirect' => env('VKONTAKTE_REDIRECT_URI')
+    ],
 ];

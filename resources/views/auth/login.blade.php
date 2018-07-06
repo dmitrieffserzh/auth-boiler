@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-
+    <div class="col-md-12">
                 <div>{{ __('Login') }}</div>
 
                     <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
@@ -58,5 +58,11 @@
                         </div>
                     </form>
 
-
+</div>
+<div class="col-md-12">
+                <a href="{{ route('auth.login.social', 'facebook') }}" class="auth-social">Facebook</a>
+                <a href="{{ route('auth.login.social', 'vkontakte') }}" class="auth-social">Вконтакте</a>
+                <a href="{{ route('auth.login.social', 'vkontakte') }}" class="auth-social">Одноклассники</a>
+                <a href="{{ route('auth.login.social', 'facebook') }}" class="auth-social">Instagram</a>
+</div>
 @endsection

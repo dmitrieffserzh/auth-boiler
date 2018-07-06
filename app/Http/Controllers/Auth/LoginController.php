@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Socialite;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -20,20 +20,23 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('guest')->except('logout');
     }
+
+
+
+
+    // Social auth
+
+	public function redirect( $service ) {
+		return Socialite::driver ( $service )->redirect ();
+	}
+
+	public function callback($service) {
+		$user = Socialite::with ( $service )->user ();
+		return view ( 'home' )->withDetails ( $user )->withService ( $service );
+	}
 }
