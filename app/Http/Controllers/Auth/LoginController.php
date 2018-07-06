@@ -35,8 +35,9 @@ class LoginController extends Controller {
 		return Socialite::driver ( $service )->redirect ();
 	}
 
-	public function callback($service) {
+	public function callback( $service ) {
 		$user = Socialite::with ( $service )->user ();
-		return view ( 'home' )->withDetails ( $user )->withService ( $service );
+		//dd($user);
+		return view ( 'home' )->withDetails( $user )->withService ( $service );
 	}
 }

@@ -17,7 +17,8 @@
                         @if($service == 'vkontakte')
                             <div class="title m-b-md">
                                 Welcome {{ $details->user['name']}} ! <br> Your email is : {{
-    $details->user['email'] }} <br> You are {{ $details->user['gender'] }}.
+    $details->user['email'] }} <br>
+
                             </div>
                         @endif
 
@@ -25,14 +26,15 @@
                         @if($service == 'facebook')
                             <div class="title m-b-md">
                                 Welcome {{ $details->user['name']}} ! <br> Your email is : {{
-    $details->user['email'] }} <br> You are {{ $details->user['gender'] }}.
+    $details->user['email'] }} <br> <img src="{{ $details->avatar_original }}" width="300px">
                             </div>
                         @endif
 
                         @if($service == 'instagram')
                             <div class="title m-b-md">
-                                Welcome {{ $details->user['name']}} ! <br> Your email is : {{
-    $details->user['email'] }} <br> You are {{ $details->user['gender'] }}.
+                                Welcome {{ $details->user['username']}} ! <br>
+                                <img src="{{ $details->user['profile_picture'] }}">
+
                             </div>
                         @endif
 
