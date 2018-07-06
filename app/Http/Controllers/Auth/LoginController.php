@@ -37,7 +37,7 @@ class LoginController extends Controller {
 
 	public function callback( $service ) {
 		$user = Socialite::with ( $service )->user ();
-		//dd($user);
+		dd($user);
 		return view ( 'home' )->withDetails( $user )->withService ( $service );
 	}
 }
