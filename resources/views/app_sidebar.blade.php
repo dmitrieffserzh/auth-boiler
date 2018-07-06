@@ -20,9 +20,12 @@
 
 <div class="container">
     <div id="content" class="row no-gutters">
-        <main class="main col-md-12">
+        <main class="main col-md-9">
             @yield('content')
         </main>
+        <aside class="aside col-md-3">
+            @yield('aside')
+        </aside>
     </div>
 </div>
 
