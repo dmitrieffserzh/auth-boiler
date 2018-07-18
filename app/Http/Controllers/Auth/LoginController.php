@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+//use App\User;
 use Socialite;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -32,12 +33,16 @@ class LoginController extends Controller {
     // Social auth
 
 	public function redirect( $service ) {
-		return Socialite::driver ( $service )->redirect ();
+		return Socialite::driver( $service )->redirect();
 	}
 
 	public function callback( $service ) {
-		$user = Socialite::with ( $service )->user ();
+		$user = Socialite::with( $service )->user();
+
+		$token = md5('663637731686155nWgZNilca738y4NGWA1q');
+		echo $token;
+
 		dd($user);
-		return view ( 'home' )->withDetails( $user )->withService ( $service );
+		return view ( 'home' )->withDetails( $user )->withService( $service );
 	}
 }

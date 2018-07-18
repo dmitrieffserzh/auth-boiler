@@ -1,10 +1,7 @@
 @extends('app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
@@ -14,11 +11,11 @@
                         </div>
                     @endif
 
+                    @if(isset($service))
                         @if($service == 'vkontakte')
                             <div class="title m-b-md">
-                                Welcome {{ $details->user['name']}} ! <br> Your email is : {{
-    $details->user['email'] }} <br>
-
+                                Привет, <b>{{ $details->name}}</b>! <br>
+                                <br> <img src="{{ $details->avatar }}" width="300px">
                             </div>
                         @endif
 
@@ -37,10 +34,7 @@
 
                             </div>
                         @endif
-
+                    @endif
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection

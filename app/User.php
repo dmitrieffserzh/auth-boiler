@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\SocialLogin;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,4 +27,23 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+
+
+
+
+    // RELATIONS
+
+	public function getProvider($provider) {
+		return $this->providers->first(function (SocialLogin $item) use ($provider) {
+			return $item->provider === $provider;
+		});
+	}
+
+	public function providers() {
+		return $this->hasMany(SocialLogin::class);
+	}
+
+
 }
