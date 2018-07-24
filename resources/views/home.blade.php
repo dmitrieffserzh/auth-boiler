@@ -23,7 +23,7 @@
                         @if($service == 'facebook')
                             <div class="title m-b-md">
                                 Welcome {{ $details->user['name']}} ! <br> Your email is : {{
-    $details->user['email'] }} <br> <img src="{{ $details->avatar_original }}" width="300px">
+                                $details->user['email'] }} <br> <img src="{{ $details->avatar_original }}" width="300px">
                             </div>
                         @endif
 
