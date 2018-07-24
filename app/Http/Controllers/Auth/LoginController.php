@@ -42,7 +42,7 @@ class LoginController extends Controller {
 
 		//dd($user);
 
-		$authUser = $this->findOrCreateUser( $service, $user );
+		$authUser = $this->findOrCreateUser( $user, $service );
 
 		Auth::login( $authUser, true );
 
@@ -58,8 +58,9 @@ class LoginController extends Controller {
 		}
 
 		return SocialLogin::create( [
-			'name'        => $user->name,
-			'email'       => $user->email,
+			'user_id'     => 1,
+			//'name'        => $user->name,
+			//'email'       => $user->email,
 			'provider'    => $service,
 			'provider_id' => $user->id,
 			'token'       => $user->token,
