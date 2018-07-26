@@ -11,6 +11,13 @@
                         </div>
                     @endif
 
+                        @guest
+
+                            Авторизуйтесь
+                        @else
+                             {{ Auth::user()->name }}
+                        @endguest
+
                     @if(isset($service))
                         @if($service == 'vkontakte')
                             <div class="title m-b-md">

@@ -2,13 +2,15 @@
 
 namespace App;
 
+use App\Models\Profile;
 use App\Models\SocialLogin;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use Notifiable;
+	use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -34,16 +36,17 @@ class User extends Authenticatable
 
 
     // RELATIONS
-
 	public function getProvider($provider) {
 		return $this->providers->first(function (SocialLogin $item) use ($provider) {
 			return $item->provider === $provider;
 		});
 	}
 
-	public function providers() {
-		return $this->hasMany(SocialLogin::class);
+	public function socialLogin() {
+		return $this->hasOne(SocialLogin::class);
 	}
 
-
+	public function profile() {
+		return $this->hasOne(Profile::class);
+	}
 }

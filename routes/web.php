@@ -17,3 +17,7 @@ Route::get ( '/redirect/{service}', 'Auth\LoginController@redirect' )->name('aut
 Route::get ( '/callback/{service}', 'Auth\LoginController@callback' )->name('auth.callback.social');
 
 Route::get('/', 'HomeController@index')->name('home');
+
+
+Route::get('/profile/{id}', 'ProfileController@profile')->name('users.profile');
+

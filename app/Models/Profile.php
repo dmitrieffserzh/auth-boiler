@@ -2,9 +2,17 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model
-{
+class Profile extends Model {
     //
+
+
+
+
+	// RELATIONS
+	public function user() {
+		return $this->belongsTo(User::class);
+	}
 }
