@@ -40,7 +40,7 @@ class OAuthController  extends Controller {
 
 
 		} elseif ( $service == 'facebook' ) {
-
+			$user = Socialite::with( $service )->user();
 		} elseif ( $service == 'vkontakte' ) {
 			$user = Socialite::with( $service )->fields( [ 'first_name', 'last_name', 'email', 'sex', 'bdate', 'city', 'photo_max_orig' ] )->user();
 		}
@@ -97,6 +97,9 @@ class OAuthController  extends Controller {
 		// CREATE USER PROFILE
 
 		if ( $user->getAvatar() ) {
+
+
+
 			$filename = "uploads/avatars/" . time() . ".jpg";
 			// The filename to save in the database.
 			file_put_contents(
