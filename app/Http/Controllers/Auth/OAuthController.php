@@ -23,7 +23,7 @@ class OAuthController  extends Controller {
 
 
 	public function callback( $service ) {
-
+		//dd(substr( str_shuffle( str_repeat( $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil( 8 / strlen( $x ) ) ) ), 1, 8 ));
 		if ( $service == 'google' ) {
 
 
@@ -65,12 +65,18 @@ class OAuthController  extends Controller {
 			return $authUser->user;
 		}
 
+
+		$pass = substr( str_shuffle( str_repeat( $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil( 6 / strlen( $x ) ) ) ), 1, 6 );
+
 		// CREATE USER
 		$authUser = User::create( [
 			'name'     => mb_strtolower( $user->nickname ),
 			'email'    => mb_strtolower( $user->nickname ) . '@test.ru',
-			'password' => bcrypt( substr( str_shuffle( str_repeat( $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil( 6 / strlen( $x ) ) ) ), 1, 6 ) ),
+			'password' => bcrypt( $pass ),
 		] );
+
+
+
 
 		$socialLogin              = new OAuth();
 		$socialLogin->provider    = $service;
@@ -82,7 +88,7 @@ class OAuthController  extends Controller {
 		// CREATE USER PROFILE
 
 		if ( $user->getAvatar() ) {
-			$filename = "/uploads/avatars/" . time() . ".jpg";
+			$filename = "uploads/avatars/" . time() . ".jpg";
 			// The filename to save in the database.
 			file_put_contents(
 				$filename,
@@ -105,6 +111,7 @@ class OAuthController  extends Controller {
 		$profile->avatar = $filename;
 		$authUser->profile()->save( $profile );
 
+		//dd($pass);
 		return $authUser;
 
 	}
