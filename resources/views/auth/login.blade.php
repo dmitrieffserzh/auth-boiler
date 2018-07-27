@@ -60,9 +60,9 @@
 
 </div>
 <div class="col-md-12">
-                <a href="{{ route('auth.login.social', 'facebook') }}" class="auth-social">Facebook</a>
-                <a href="{{ route('auth.login.social', 'vkontakte') }}" class="auth-social">Вконтакте</a>
-                <a href="{{ route('auth.login.social', 'odnoklassniki') }}" class="auth-social">Одноклассники</a>
-                <a href="{{ route('auth.login.social', 'instagram') }}" class="auth-social">Instagram</a>
+                <a href="{{ route('oauth.login', 'facebook') }}" class="auth-social">Facebook</a>
+                <a href="{{ route('oauth.login', 'vkontakte') }}" class="auth-social">Вконтакте</a>
+                <a href="{{ route('oauth.login', 'odnoklassniki') }}" class="auth-social">Одноклассники</a>
+                <a href="{{ route('oauth.login', 'instagram') }}" class="auth-social">Instagram</a>
 </div>
 @endsection

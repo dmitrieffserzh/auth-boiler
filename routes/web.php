@@ -14,8 +14,8 @@
 Auth::routes();
 
 // SOCIAL NETWORK AUTH
-Route::get ( '/redirect/{service}', 'Auth\SocialLoginController@redirect' )->name('auth.login.social');
-Route::get ( '/callback/{service}', 'Auth\SocialLoginController@callback' )->name('auth.callback.social');
+Route::get ( '/redirect/{service}', 'Auth\OAuthController@redirect' )->name('oauth.login');
+Route::get ( '/callback/{service}', 'Auth\OAuthController@callback' );
 
 Route::get('/', 'HomeController@index')->name('home');
 

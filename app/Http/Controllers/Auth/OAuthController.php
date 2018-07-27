@@ -6,10 +6,10 @@ use Auth;
 use Socialite;
 use App\User;
 use App\Models\Profile;
-use App\Models\SocialLogin;
+use App\Models\OAuth;
 use App\Http\Controllers\Controller;
 
-class SocialLoginController  extends Controller {
+class OAuthController  extends Controller {
 
 
 	public function __construct() {
@@ -56,9 +56,9 @@ class SocialLoginController  extends Controller {
 
 	public function findOrCreateUser( $user, $service ) {
 
-		$authUser = SocialLogin::where( 'provider', $service )
-		                       ->where( 'provider_id', $user->id )
-		                       ->first();
+		$authUser = OAuth::where( 'provider', $service )
+		                 ->where( 'provider_id', $user->id )
+		                 ->first();
 		//dd($authUser);
 
 		if ( $authUser ) {
@@ -72,12 +72,12 @@ class SocialLoginController  extends Controller {
 			'password' => bcrypt( substr( str_shuffle( str_repeat( $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil( 6 / strlen( $x ) ) ) ), 1, 6 ) ),
 		] );
 
-		$socialLogin              = new SocialLogin();
+		$socialLogin              = new OAuth();
 		$socialLogin->provider    = $service;
 		$socialLogin->provider_id = $user->id;
 		$socialLogin->token       = $user->token;
 
-		$authUser->socialLogin()->save($socialLogin);
+		$authUser->oAuth()->save($socialLogin);
 
 		// CREATE USER PROFILE
 

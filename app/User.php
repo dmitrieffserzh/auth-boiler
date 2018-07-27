@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Models\Profile;
-use App\Models\SocialLogin;
+use App\Models\OAuth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -37,13 +37,13 @@ class User extends Authenticatable {
 
     // RELATIONS
 	public function getProvider($provider) {
-		return $this->providers->first(function (SocialLogin $item) use ($provider) {
+		return $this->providers->first(function (OAuth $item) use ($provider) {
 			return $item->provider === $provider;
 		});
 	}
 
-	public function socialLogin() {
-		return $this->hasOne(SocialLogin::class);
+	public function oAuth() {
+		return $this->hasOne(OAuth::class);
 	}
 
 	public function profile() {
