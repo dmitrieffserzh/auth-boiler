@@ -9,7 +9,7 @@ use App\Models\Profile;
 use App\Models\OAuth;
 use App\Http\Controllers\Controller;
 
-class OAuthController  extends Controller {
+class OAuthController extends Controller {
 	/*
 	|--------------------------------------------------------------------------
 	| OAuth Controller
@@ -34,18 +34,57 @@ class OAuthController  extends Controller {
 	public function callback( $service ) {
 
 
-
 		//dd(substr( str_shuffle( str_repeat( $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil( 8 / strlen( $x ) ) ) ), 1, 8 ));
-		if ( $service == 'google' ) {
 
+
+		if ( $service == 'vkontakte' ) {
+
+			$request = Socialite::with( $service )
+			                    ->scopes( [
+				                    'email',
+			                    ] )
+			                    ->fields( [
+				                    'nickname',
+				                    'first_name',
+				                    'last_name',
+				                    'sex',
+				                    'bdate',
+				                    'city',
+				                    'photo_max_orig'
+			                    ] )
+			                    ->user();
+
+			$data = $this->handleRequestVK( $request );
+			dd( $data );
 
 		} elseif ( $service == 'twitter' ) {
 
 
 		} elseif ( $service == 'facebook' ) {
-			$user = Socialite::with( $service )->user();
-		} elseif ( $service == 'vkontakte' ) {
-			$user = Socialite::with( $service )->fields( [ 'first_name', 'last_name', 'email', 'sex', 'bdate', 'city', 'photo_max_orig' ] )->user();
+
+			$request = Socialite::with( $service )
+			                    ->scopes( [
+				                    'email',
+				                    'user_gender',
+				                    'user_birthday',
+				                    'user_location'
+			                    ] )
+			                    ->fields( [
+				                    'id',
+				                    'first_name',
+				                    'last_name',
+				                    'email',
+				                    'gender',
+				                    'birthday',
+				                    'location'
+			                    ] )
+			                    ->user();
+
+			$data = $this->handleRequestFB( $request );
+			dd( $data );
+
+		} elseif ( $service == 'google' ) {
+
 		}
 
 
@@ -60,9 +99,41 @@ class OAuthController  extends Controller {
 	}
 
 
+	// REQUEST VKONTAKTE
+	public function handleRequestVK( $request ) {
 
+		$data = array(
+			'user_id'    => isset( $request->user['id'] ) ? $request->user['id'] : null,
+			'email'      => isset( $request->accessTokenResponseBody['email'] ) ? $request->accessTokenResponseBody['email'] : null,
+			'nickname'   => isset( $request->user['nickname'] ) ? $request->user['first_name'] : null,
+			'first_name' => isset( $request->user['first_name'] ) ? $request->user['first_name'] : null,
+			'last_name'  => isset( $request->user['last_name'] ) ? $request->user['last_name'] : null,
+			'gender'     => isset( $request->user['sex'] ) ? $request->user['sex'] : null,
+			'birthday'   => isset( $request->user['bdate'] ) ? $request->user['bdate'] : null,
+			'location'   => isset( $request->user['city']['title'] ) ? $request->user['city']['title'] : null,
+			'avatar'     => isset( $request->user['photo_max_orig'] ) ? str_replace( '?ava=1', '', $request->user['photo_max_orig'] ) : null,
+		);
 
+		return $data;
+	}
 
+	// REQUEST FACEBOOK
+	public function handleRequestFB( $request ) {
+
+		$data = array(
+			'user_id'    => isset( $request->user['id'] ) ? $request->user['id'] : null,
+			'email'      => isset( $request->user['email'] ) ? $request->user['email'] : null,
+			'nickname'   => isset( $request->user['nickname'] ) ? $request->user['nickname'] : null,
+			'first_name' => isset( $request->user['first_name'] ) ? $request->user['first_name'] : null,
+			'last_name'  => isset( $request->user['last_name'] ) ? $request->user['last_name'] : null,
+			'gender'     => isset( $request->user['gender'] ) ? $request->user['gender'] : null,
+			'birthday'   => isset( $request->user['birthday'] ) ? str_replace('/', '.', $request->user['birthday']) : null,
+			'location'   => isset( $request->user['location']['name'] ) ? $request->user['location']['name'] : null,
+			'avatar'     => isset( $request->avatar ) ? str_replace( '?type=normal', '?width=1920', $request->avatar ) : null,
+		);
+
+		return $data;
+	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -80,27 +151,26 @@ class OAuthController  extends Controller {
 
 		$pass = substr( str_shuffle( str_repeat( $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil( 6 / strlen( $x ) ) ) ), 1, 6 );
 
-		// CREATE USER
-		$authUser = User::create( [
-			'name'     => mb_strtolower( $user->nickname ),
-			'email'    => mb_strtolower( $user->nickname ) . '@test.ru',
-			'password' => bcrypt( $pass ),
+		// Create user
+		$user = User::create( [
+			'nickname'                => mb_strtolower( $user->nickname ),
+			'email'                   => mb_strtolower( $user->nickname ),
+			'password'                => bcrypt( $pass ),
+			'registration_ip'         => request()->ip(),
+			'registration_user_agent' => request()->header( 'User-Agent' ),
 		] );
 
 
+		$user_oauth              = new OAuth();
+		$user_oauth->provider    = $service;
+		$user_oauth->provider_id = $user->id;
+		$user_oauth->token       = $user->token;
 
-
-		$socialLogin              = new OAuth();
-		$socialLogin->provider    = $service;
-		$socialLogin->provider_id = $user->id;
-		$socialLogin->token       = $user->token;
-
-		$authUser->oAuth()->save($socialLogin);
+		$authUser->oAuth()->save( $user_oauth );
 
 		// CREATE USER PROFILE
 
 		if ( $user->getAvatar() ) {
-
 
 
 			$filename = "uploads/avatars/" . time() . ".jpg";

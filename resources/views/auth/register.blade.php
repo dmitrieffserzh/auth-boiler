@@ -56,9 +56,9 @@
 
                             <div class="col-md-6">
                                 <select id="gender" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" required>
-                                    <option value="1">{{ __('Не указан') }}</option>
-                                    <option value="1">{{ __('Мужской') }}</option>
-                                    <option value="2">{{ __('Женский') }}</option>
+                                    <option value="0"></option>
+                                    <option value="1">{{ __('Женский') }}</option>
+                                    <option value="2">{{ __('Мужской') }}</option>
                                 </select>
 
 
