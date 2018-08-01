@@ -1,12 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dmitriev
- * Date: 01.08.2018
- * Time: 18:10
- */
 
 namespace App\Extension\SocialProviderExtension\SocialProviders;
+
 use Laravel\Socialite\Facades\Socialite;
 
 class FBProvider extends BaseProvider {
