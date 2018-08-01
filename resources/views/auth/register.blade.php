@@ -8,10 +8,24 @@
                         @csrf
 
                         <div class="form-group row">
+                            <label for="nickname" class="col-md-4 col-form-label text-md-right">{{ __('Nickname') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nickname" type="text" class="form-control{{ $errors->has('nickname') ? ' is-invalid' : '' }}" name="nickname" value="{{ old('nickname') }}" required autofocus>
+
+                                @if ($errors->has('nickname'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('nickname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required>
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
@@ -20,6 +34,44 @@
                                 @endif
                             </div>
                         </div>
+
+
+                        <div class="form-group row">
+                            <label for="birth_date" class="col-md-4 col-form-label text-md-right">{{ __('Birth date') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="birth_date" type="text" class="form-control{{ $errors->has('birth_date') ? ' is-invalid' : '' }}" name="birth_date" value="{{ old('birth_date') }}" required>
+
+                                @if ($errors->has('birth_date'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('birth_date') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="gender" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" required>
+                                    <option value="1">{{ __('Не указан') }}</option>
+                                    <option value="1">{{ __('Мужской') }}</option>
+                                    <option value="2">{{ __('Женский') }}</option>
+                                </select>
+
+
+
+                                @if ($errors->has('birth_date'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('birth_date') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OAuth extends Model {
 
-	protected $table = 'social_logins';
+	protected $table = 'users_oauth';
 
 	protected $fillable = [
 		'user_id',
