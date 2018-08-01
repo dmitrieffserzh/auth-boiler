@@ -15,15 +15,18 @@
 
             Авторизуйтесь
         @else
+                <div>
             {{ Auth::user()->nickname }}
             {{ Auth::user()->profile->first_name }}
             {{ Auth::user()->profile->last_name }}
             {{ Auth::user()->profile->location }}
+                    </div>
+<div>
+            <img src="/{{ Auth::user()->profile->avatar }}" class="avatar" width="300px">
+</div>
 
 
-
-            <img src="/{{ Auth::user()->profile->avatar }}" class="avatar">
-        @endguest
+            @endguest
 
     </div>
 
