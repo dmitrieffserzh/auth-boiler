@@ -13,7 +13,7 @@ class OAuth extends Model {
 		'user_id',
 		'provider',
 		'provider_id',
-		'token',
+		//'token',
 	];
 
 

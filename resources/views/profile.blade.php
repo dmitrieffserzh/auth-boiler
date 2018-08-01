@@ -16,7 +16,9 @@
             Авторизуйтесь
         @else
             {{ Auth::user()->nickname }}
-            {{ Auth::user()->profile->name }}
+            {{ Auth::user()->profile->first_name }}
+            {{ Auth::user()->profile->last_name }}
+            {{ Auth::user()->profile->location }}
 
 
 

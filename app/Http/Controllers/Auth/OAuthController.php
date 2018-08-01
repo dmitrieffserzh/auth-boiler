@@ -55,7 +55,7 @@ class OAuthController extends Controller {
 			                    ->user();
 
 			$data = $this->handleRequestVK( $request );
-			dd( $data );
+			//dd( $data );
 
 		} elseif ( $service == 'twitter' ) {
 
@@ -81,7 +81,7 @@ class OAuthController extends Controller {
 			                    ->user();
 
 			$data = $this->handleRequestFB( $request );
-			dd( $data );
+			//dd( $data );
 
 		} elseif ( $service == 'google' ) {
 
@@ -91,7 +91,7 @@ class OAuthController extends Controller {
 		//dd($user);
 
 
-		$authUser = $this->findOrCreateUser( $user, $service );
+		$authUser = $this->findOrCreateUser( $data, $service );
 
 		Auth::login( $authUser, true );
 
@@ -127,7 +127,7 @@ class OAuthController extends Controller {
 			'first_name' => isset( $request->user['first_name'] ) ? $request->user['first_name'] : null,
 			'last_name'  => isset( $request->user['last_name'] ) ? $request->user['last_name'] : null,
 			'gender'     => isset( $request->user['gender'] ) ? $request->user['gender'] : null,
-			'birthday'   => isset( $request->user['birthday'] ) ? str_replace('/', '.', $request->user['birthday']) : null,
+			'birthday'   => isset( $request->user['birthday'] ) ? str_replace( '/', '.', $request->user['birthday'] ) : null,
 			'location'   => isset( $request->user['location']['name'] ) ? $request->user['location']['name'] : null,
 			'avatar'     => isset( $request->avatar ) ? str_replace( '?type=normal', '?width=1920', $request->avatar ) : null,
 		);
@@ -137,10 +137,10 @@ class OAuthController extends Controller {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public function findOrCreateUser( $user, $service ) {
+	public function findOrCreateUser( $data, $service ) {
 
 		$authUser = OAuth::where( 'provider', $service )
-		                 ->where( 'provider_id', $user->id )
+		                 ->where( 'provider_id', $data['user_id'] )
 		                 ->first();
 		//dd($authUser);
 
@@ -153,8 +153,8 @@ class OAuthController extends Controller {
 
 		// Create user
 		$user = User::create( [
-			'nickname'                => mb_strtolower( $user->nickname ),
-			'email'                   => mb_strtolower( $user->nickname ),
+			'nickname'                => isset($data['nickname']) ? mb_strtolower($data['nickname']) : substr( str_shuffle( str_repeat( $x = '0123456789', ceil( 15 / strlen( $x ) ) ) ), 1, 15 ),
+			'email'                   => mb_strtolower( $data['email'] ),
 			'password'                => bcrypt( $pass ),
 			'registration_ip'         => request()->ip(),
 			'registration_user_agent' => request()->header( 'User-Agent' ),
@@ -163,41 +163,36 @@ class OAuthController extends Controller {
 
 		$user_oauth              = new OAuth();
 		$user_oauth->provider    = $service;
-		$user_oauth->provider_id = $user->id;
-		$user_oauth->token       = $user->token;
+		$user_oauth->provider_id = $data['user_id'];
+		//$user_oauth->token       = $user->token;
 
-		$authUser->oAuth()->save( $user_oauth );
+		$user->oAuth()->save( $user_oauth );
 
 		// CREATE USER PROFILE
 
-		if ( $user->getAvatar() ) {
-
+		if ( isset($data['avatar'] )) {
 
 			$filename = "uploads/avatars/" . time() . ".jpg";
 			// The filename to save in the database.
 			file_put_contents(
 				$filename,
-				file_get_contents( $user->getAvatar() )
+				file_get_contents( $data['avatar'] )
 			);
 		}
 
-		if ( $file = $user->getAvatar() ) {
-			if ( $service == 'google' ) {
-				$file = str_replace( '?sz=50', '', $file );
-			} elseif ( $service == 'twitter' ) {
-				$file = str_replace( '_normal', '', $file );
-			} elseif ( $service == 'facebook' ) {
-				$file = str_replace( 'type=normal', 'type=large', $file );
-			}
-		}
 
+		$profile             = new Profile();
+		$profile->first_name = $data['first_name'];
+		$profile->last_name  = $data['last_name'];
+		$profile->gender     = $data['gender'];
+		$profile->birthday   = $data['birthday'];
+		$profile->location   = $data['location'];
+		$profile->avatar     = $filename;
 
-		$profile         = new Profile();
-		$profile->avatar = $filename;
-		$authUser->profile()->save( $profile );
+		$user->profile()->save( $profile );
 
 		//dd($pass);
-		return $authUser;
+		return $user;
 
 	}
 
