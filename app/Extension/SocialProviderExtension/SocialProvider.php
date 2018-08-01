@@ -2,7 +2,8 @@
 
 namespace App\Extension\SocialProviderExtension;
 
-use App\Extension\SocialProviderExtension\SocialProviders;
+use App\Extension\SocialProviderExtension\SocialProviders\VKProvider;
+use App\Extension\SocialProviderExtension\SocialProviders\FBProvider;
 
 class SocialProvider {
 
@@ -10,10 +11,10 @@ class SocialProvider {
 		$provider = null;
 		switch ($service){
 			case 'vkontakte':
-				$provider = new SocialProviders\VKProvider();
+				$provider = new VKProvider();
 				break;
 			case 'facebook':
-				$provider = new SocialProviders\FBProvider();
+				$provider = new FBProvider();
 				break;
 		}
 
