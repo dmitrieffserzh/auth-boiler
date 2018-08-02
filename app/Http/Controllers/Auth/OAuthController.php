@@ -28,7 +28,7 @@ class OAuthController extends Controller {
 
 
 	public function redirect( $service ) {
-		return Socialite::driver( $service )->redirect();
+		return Socialite::driver( $service )->redirect('/');
 	}
 
 
@@ -57,13 +57,11 @@ class OAuthController extends Controller {
 		}
 
 
-		$pass = substr( str_shuffle( str_repeat( $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil( 6 / strlen( $x ) ) ) ), 1, 6 );
-
-		// Create user
+		// CREATE USER
 		$user = User::create( [
-			'nickname'                => !is_null( $data['nickname'] ) ? mb_strtolower( $data['nickname'] ) : substr( str_shuffle( str_repeat( $x = '0123456789', ceil( 15 / strlen( $x ) ) ) ), 1, 15 ),
-			'email'                   => mb_strtolower( $data['email'] ),
-			'password'                => bcrypt( $pass ),
+			'nickname'                => !is_null($data['nickname']) ? $data['nickname'] : $this->nicknameGenerator(),
+			'email'                   => $data['email'],
+			'password'                => bcrypt( $this->passwordGenerator()),
 			'registration_ip'         => request()->ip(),
 			'registration_user_agent' => request()->header( 'User-Agent' ),
 		] );
@@ -72,34 +70,60 @@ class OAuthController extends Controller {
 		$user_oauth              = new OAuth();
 		$user_oauth->provider    = $service;
 		$user_oauth->provider_id = $data['user_id'];
-		//$user_oauth->token       = $user->token;
+		$user_oauth->token       = $data['token'];
 
 		$user->oAuth()->save( $user_oauth );
 
 		// CREATE USER PROFILE
-
-		if ( isset( $data['avatar'] ) ) {
-
-			$filename = "uploads/avatars/" . time() . ".jpg";
-			file_put_contents(
-				$filename,
-				file_get_contents( $data['avatar'] )
-			);
-		}
-
-
 		$profile             = new Profile();
 		$profile->first_name = $data['first_name'];
 		$profile->last_name  = $data['last_name'];
 		$profile->gender     = $data['gender'];
 		$profile->birthday   = $data['birthday'];
 		$profile->location   = $data['location'];
-		$profile->avatar     = $filename;
+		$profile->avatar     = $this->saveAvatar($data['avatar']);
 
 		$user->profile()->save( $profile );
 
 		return $user;
 
 	}
+
+
+
+	private function saveAvatar($imgUrl) {
+		if(is_null($imgUrl))
+			return null;
+
+		$filename = "uploads/avatars/" . time() . ".jpg";
+		file_put_contents(
+			$filename,
+			file_get_contents($imgUrl)
+		);
+		return $filename;
+	}
+
+	private function nicknameGenerator() {
+		$alphabet = '1234567890';
+		$pass = array();
+		$alphaLength = strlen($alphabet) - 1;
+		for ($i = 0; $i < 15; $i++) {
+			$n = rand(0, $alphaLength);
+			$pass[] = $alphabet[$n];
+		}
+		return implode($pass);
+	}
+
+	private function passwordGenerator() {
+		$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+		$pass = array();
+		$alphaLength = strlen($alphabet) - 1;
+		for ($i = 0; $i < 8; $i++) {
+			$n = rand(0, $alphaLength);
+			$pass[] = $alphabet[$n];
+		}
+		return implode($pass);
+	}
+
 
 }

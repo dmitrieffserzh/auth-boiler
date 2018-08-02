@@ -16,11 +16,11 @@
             Авторизуйтесь
         @else
                 <div>
-            {{ Auth::user()->nickname }}
-            {{ Auth::user()->profile->first_name }}
-            {{ Auth::user()->profile->last_name }}
-            {{ Auth::user()->profile->location }}
-                    </div>
+                    <strong style="display:block"><strong>@</strong>{{ Auth::user()->nickname }}</strong>
+                    <span>{{ Auth::user()->profile->first_name }} </span>
+                    <span>{{ Auth::user()->profile->last_name }}</span>
+                    <span style="display:block">{{ Auth::user()->profile->location }}</span>
+                </div>
 <div>
             <img src="/{{ Auth::user()->profile->avatar }}" class="avatar" width="300px">
 </div>

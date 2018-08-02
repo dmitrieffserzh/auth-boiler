@@ -8,6 +8,7 @@ class FBProvider extends BaseProvider {
 
 	protected function handleRequest($request){
 		$data = array(
+			'token'      => $this->getField($request, 'token'),
 			'user_id'    => $this->getField($request, 'user', 'id'),
 			'email'      => $this->getField($request, 'user', 'email'),
 			'nickname'   => $this->getField($request, 'user', 'nickname'),
