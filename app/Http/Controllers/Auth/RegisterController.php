@@ -34,17 +34,18 @@ class RegisterController extends Controller {
 
     protected function validator(array $data) {
         return Validator::make($data, [
-            'nickname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'name' => 'required|string|max:30',
-            'birth_date' => 'required|string|max:255',
-            'gender' => 'required|integer|min:1|max:2',
+            'nickname'   => 'required|string|max:255',
+            'email'      => 'required|string|email|max:255|unique:users',
+            'password'   => 'required|string|min:6|confirmed',
+            'first_name' => 'required|string|max:30',
+            'last_name'  => 'required|string|max:30',
+            'birthday'   => 'required|string|max:255',
+            'gender'     => 'required|integer|min:1|max:2',
         ]);
     }
 
 
-    protected function create(array $data ) {
+    protected function create(array $data) {
 
     	// Create user
         $user = User::create([
@@ -56,12 +57,13 @@ class RegisterController extends Controller {
         ]);
 
 	    // Create user profile
-	    $profile             = new Profile();
-	    $profile->name       = $data['name'];
-	    $profile->birth_date = $data['birth_date'];
-	    $profile->gender     = $data['gender'];
+	    $profile              = new Profile();
+	    $profile->first_name  = $data['first_name'];
+	    $profile->last_name   = $data['last_name'];
+	    $profile->birthday    = $data['birthday'];
+	    $profile->gender      = $data['gender'];
 
-	    $user->profile()->save( $profile );
+	    $user->profile()->save($profile);
 
 	    return $user;
     }

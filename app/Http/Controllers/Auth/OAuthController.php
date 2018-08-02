@@ -8,6 +8,7 @@ use App\User;
 use App\Models\Profile;
 use App\Models\OAuth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Extension\SocialProviderExtension\SocialProvider;
 
 class OAuthController extends Controller {
@@ -28,12 +29,10 @@ class OAuthController extends Controller {
 
 
 	public function redirect( $service ) {
-		return Socialite::driver( $service )->redirect('/');
+		return Socialite::driver( $service )->redirect();
 	}
 
-
 	public function callback( $service ) {
-
 		$provider = new SocialProvider();
 
 		$data = $provider->mappingRequest($service);
@@ -42,7 +41,7 @@ class OAuthController extends Controller {
 
 		Auth::login( $authUser, true );
 
-		return view( 'profile' );
+		return view('profile');
 	}
 
 
@@ -56,6 +55,14 @@ class OAuthController extends Controller {
 			return $authUser->user;
 		}
 
+
+		$existEmail = Validator::make($data, [
+			'email' => 'unique:users',
+		]);
+
+		if($existEmail->fails()) {
+			return redirect()->route('login');
+		}
 
 		// CREATE USER
 		$user = User::create( [
@@ -88,7 +95,6 @@ class OAuthController extends Controller {
 		return $user;
 
 	}
-
 
 
 	private function saveAvatar($imgUrl) {

@@ -19,6 +19,7 @@
                     <strong style="display:block"><strong>@</strong>{{ Auth::user()->nickname }}</strong>
                     <span>{{ Auth::user()->profile->first_name }} </span>
                     <span>{{ Auth::user()->profile->last_name }}</span>
+                    <span style="display:block">{{ Auth::user()->profile->birthday }}</span>
                     <span style="display:block">{{ Auth::user()->profile->location }}</span>
                 </div>
 <div>
