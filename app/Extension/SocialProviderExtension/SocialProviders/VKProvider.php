@@ -8,9 +8,9 @@ class VKProvider extends BaseProvider {
 
 	protected function handleRequest($request){
 		$data = array(
-			'user_id'    => isset( $request->user['id'] ) ? $request->user['id'] : null,
+			'user_id'    => $request->getId(),
 			'email'      => isset( $request->accessTokenResponseBody['email'] ) ? $request->accessTokenResponseBody['email'] : null,
-			'nickname'   => isset( $request->user['nickname'] ) ? $request->user['nickname'] : null,
+			'nickname'   => $request->getNickname(),
 			'first_name' => isset( $request->user['first_name'] ) ? $request->user['first_name'] : null,
 			'last_name'  => isset( $request->user['last_name'] ) ? $request->user['last_name'] : null,
 			'gender'     => isset( $request->user['sex'] ) ? $request->user['sex'] : null,
@@ -18,11 +18,11 @@ class VKProvider extends BaseProvider {
 			'location'   => isset( $request->user['city']['title'] ) ? $request->user['city']['title'] : null,
 			'avatar'     => isset( $request->user['photo_max_orig'] ) ? str_replace( '?ava=1', '', $request->user['photo_max_orig'] ) : null,
 		);
-
+		dd($data);
 		return $data;
 	}
 
-	protected  function  getRequest() {
+	protected function getRequest() {
 		return Socialite::with( 'vkontakte' )
 		                    ->scopes([ 'email', ])
 		                    ->fields([ 'nickname', 'first_name', 'last_name', 'sex', 'bdate', 'city', 'photo_max_orig' ])

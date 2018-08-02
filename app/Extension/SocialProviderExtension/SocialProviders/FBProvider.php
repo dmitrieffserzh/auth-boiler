@@ -8,25 +8,51 @@ class FBProvider extends BaseProvider {
 
 	protected function handleRequest($request){
 		$data = array(
-			'user_id'    => isset( $request->user['id'] ) ? $request->user['id'] : null,
-			'email'      => isset( $request->user['email'] ) ? $request->user['email'] : null,
-			'nickname'   => isset( $request->user['nickname'] ) ? $request->user['nickname'] : null,
-			'first_name' => isset( $request->user['first_name'] ) ? $request->user['first_name'] : null,
-			'last_name'  => isset( $request->user['last_name'] ) ? $request->user['last_name'] : null,
-			'gender'     => isset( $request->user['gender'] ) ? $request->user['gender'] : null,
-			'birthday'   => isset( $request->user['birthday'] ) ? str_replace( '/', '.', $request->user['birthday'] ) : null,
-			'location'   => isset( $request->user['location']['name'] ) ? $request->user['location']['name'] : null,
-			'avatar'     => isset( $request->avatar ) ? str_replace( '?type=normal', '?width=1920', $request->avatar ) : null,
+			'user_id'    => $this->getField($request, 'user', 'id'),
+			'email'      => $this->getField($request, 'user', 'email'),
+			'nickname'   => $this->getField($request, 'user', 'nickname'),
+			'first_name' => $this->getField($request, 'user', 'first_name'),
+			'last_name'  => $this->getField($request, 'user', 'last_name'),
+			'location'   => $this->getField($request, 'user', 'location', 'name'),
+			'gender'     => $this->handleGender(    $this->getField($request, 'user','gender')),
+			'birthday'   => $this->handleBirthDate( $this->getField($request, 'user', 'birthday')),
+			'avatar'     => $this->handleAvatar(    $this->getField($request, 'avatar')),
 		);
 
+		dd($data);
 		return $data;
 	}
 
-	protected  function  getRequest() {
-		return Socialite::with( 'facebook' )
+	protected function getRequest() {
+		return Socialite::with('facebook')
 		                           ->scopes([ 'email', 'user_gender', 'user_birthday', 'user_location' ] )
 		                           ->fields( [ 'id', 'first_name', 'last_name', 'email', 'gender', 'birthday', 'location' ] )
 		                           ->user();
+	}
+
+
+	protected function handleGender($gender) {
+		$result = null;
+		switch ($gender) {
+			case 'female':
+				$result = '1';
+				break;
+			case 'male':
+				$result = '2';
+				break;
+			default:
+				$result = '0';
+				break;
+		}
+		return $result;
+	}
+
+	protected function handleBirthDate($date) {
+		return date('d.m.Y', strtotime($date));
+	}
+
+	protected function handleAvatar($avatar) {
+		return str_replace('?type=normal', '?width=1920', $avatar);
 	}
 
 }
