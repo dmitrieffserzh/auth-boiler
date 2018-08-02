@@ -64,9 +64,18 @@ class OAuthController extends Controller {
 		if ( $existEmail->fails() )
 			return false;
 
+		$existNickname = Validator::make( $data, [
+			'nickname' => 'unique:users',
+		] );
+
+		if ( $existNickname->fails() )
+			return false;
+
+
+
 		// CREATE USER
 		$user = User::create( [
-			'nickname'                => ! is_null( $data['nickname'] ) ? $data['nickname'] : $this->nicknameGenerator(),
+			'nickname'                => ! is_null( $data['nickname'] ) ? $data['nickname'] : time().$this->nicknameGenerator(),
 			'email'                   => $data['email'],
 			'password'                => bcrypt( $this->passwordGenerator() ),
 			'registration_ip'         => request()->ip(),
@@ -114,7 +123,7 @@ class OAuthController extends Controller {
 		$alphabet    = '1234567890';
 		$pass        = array();
 		$alphaLength = strlen( $alphabet ) - 1;
-		for ( $i = 0; $i < 15; $i ++ ) {
+		for ( $i = 0; $i < 5; $i ++ ) {
 			$n      = rand( 0, $alphaLength );
 			$pass[] = $alphabet[ $n ];
 		}
