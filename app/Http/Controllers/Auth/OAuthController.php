@@ -27,7 +27,6 @@ class OAuthController extends Controller {
 		$this->middleware( 'guest' );
 	}
 
-
 	public function redirect( $service ) {
 		return Socialite::driver( $service )->redirect();
 	}
@@ -35,13 +34,16 @@ class OAuthController extends Controller {
 	public function callback( $service ) {
 		$provider = new SocialProvider();
 
-		$data = $provider->mappingRequest($service);
+		$data = $provider->mappingRequest( $service );
 
 		$authUser = $this->findOrCreateUser( $data, $service );
 
+		if ( $authUser == false )
+			return redirect( 'login' )->withErrors( [ 'user_exist' => true ] );
+
 		Auth::login( $authUser, true );
 
-		return view('profile');
+		return view( 'profile' );
 	}
 
 
@@ -51,24 +53,22 @@ class OAuthController extends Controller {
 		                 ->where( 'provider_id', $data['user_id'] )
 		                 ->first();
 
-		if ( $authUser ) {
+		if ( $authUser )
 			return $authUser->user;
-		}
 
 
-		$existEmail = Validator::make($data, [
+		$existEmail = Validator::make( $data, [
 			'email' => 'unique:users',
-		]);
+		] );
 
-		if($existEmail->fails()) {
-			return redirect()->route('login');
-		}
+		if ( $existEmail->fails() )
+			return false;
 
 		// CREATE USER
 		$user = User::create( [
-			'nickname'                => !is_null($data['nickname']) ? $data['nickname'] : $this->nicknameGenerator(),
+			'nickname'                => ! is_null( $data['nickname'] ) ? $data['nickname'] : $this->nicknameGenerator(),
 			'email'                   => $data['email'],
-			'password'                => bcrypt( $this->passwordGenerator()),
+			'password'                => bcrypt( $this->passwordGenerator() ),
 			'registration_ip'         => request()->ip(),
 			'registration_user_agent' => request()->header( 'User-Agent' ),
 		] );
@@ -88,7 +88,7 @@ class OAuthController extends Controller {
 		$profile->gender     = $data['gender'];
 		$profile->birthday   = $data['birthday'];
 		$profile->location   = $data['location'];
-		$profile->avatar     = $this->saveAvatar($data['avatar']);
+		$profile->avatar     = $this->saveAvatar( $data['avatar'] );
 
 		$user->profile()->save( $profile );
 
@@ -97,38 +97,41 @@ class OAuthController extends Controller {
 	}
 
 
-	private function saveAvatar($imgUrl) {
-		if(is_null($imgUrl))
+	private function saveAvatar( $imgUrl ) {
+		if ( is_null( $imgUrl ) )
 			return null;
 
 		$filename = "uploads/avatars/" . time() . ".jpg";
 		file_put_contents(
 			$filename,
-			file_get_contents($imgUrl)
+			file_get_contents( $imgUrl )
 		);
+
 		return $filename;
 	}
 
 	private function nicknameGenerator() {
-		$alphabet = '1234567890';
-		$pass = array();
-		$alphaLength = strlen($alphabet) - 1;
-		for ($i = 0; $i < 15; $i++) {
-			$n = rand(0, $alphaLength);
-			$pass[] = $alphabet[$n];
+		$alphabet    = '1234567890';
+		$pass        = array();
+		$alphaLength = strlen( $alphabet ) - 1;
+		for ( $i = 0; $i < 15; $i ++ ) {
+			$n      = rand( 0, $alphaLength );
+			$pass[] = $alphabet[ $n ];
 		}
-		return implode($pass);
+
+		return implode( $pass );
 	}
 
 	private function passwordGenerator() {
-		$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-		$pass = array();
-		$alphaLength = strlen($alphabet) - 1;
-		for ($i = 0; $i < 8; $i++) {
-			$n = rand(0, $alphaLength);
-			$pass[] = $alphabet[$n];
+		$alphabet    = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+		$pass        = array();
+		$alphaLength = strlen( $alphabet ) - 1;
+		for ( $i = 0; $i < 8; $i ++ ) {
+			$n      = rand( 0, $alphaLength );
+			$pass[] = $alphabet[ $n ];
 		}
-		return implode($pass);
+
+		return implode( $pass );
 	}
 
 

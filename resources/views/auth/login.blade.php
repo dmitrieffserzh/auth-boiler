@@ -4,6 +4,15 @@
     <div class="col-md-12">
                 <div>{{ __('Login') }}</div>
 
+
+
+
+        @if ( $errors->first('user_exist')  == true )
+            <h2>Хренушки! Пользователь с таким мылом уже существует</h2>
+        @endif
+
+
+
                     <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                         @csrf
 
