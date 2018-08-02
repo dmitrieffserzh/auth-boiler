@@ -110,7 +110,7 @@ class OAuthController extends Controller {
 		if ( is_null( $imgUrl ) )
 			return null;
 
-		$filename = "uploads/avatars/" . time() . ".jpg";
+		$filename = $this->nicknameGenerator() . time() . "_" . time() . $this->nicknameGenerator() . ".jpg";
 		file_put_contents(
 			$filename,
 			file_get_contents( $imgUrl )
@@ -121,14 +121,14 @@ class OAuthController extends Controller {
 
 	private function nicknameGenerator() {
 		$alphabet    = '1234567890';
-		$pass        = array();
+		$nick        = array();
 		$alphaLength = strlen( $alphabet ) - 1;
 		for ( $i = 0; $i < 5; $i ++ ) {
 			$n      = rand( 0, $alphaLength );
-			$pass[] = $alphabet[ $n ];
+			$nick [] = $alphabet[ $n ];
 		}
 
-		return implode( $pass );
+		return implode( $nick  );
 	}
 
 	private function passwordGenerator() {
