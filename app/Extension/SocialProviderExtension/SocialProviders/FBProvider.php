@@ -18,8 +18,6 @@ class FBProvider extends BaseProvider {
 			'birthday'   => $this->handleBirthDate( $this->getField($request, 'user', 'birthday')),
 			'avatar'     => $this->handleAvatar(    $this->getField($request, 'avatar')),
 		);
-
-		dd($data);
 		return $data;
 	}
 
@@ -30,6 +28,15 @@ class FBProvider extends BaseProvider {
 		                           ->user();
 	}
 
+
+	// FIELD HANDLERS
+	protected function handleBirthDate($date) {
+		return date('d.m.Y', strtotime($date));
+	}
+
+	protected function handleAvatar($avatar) {
+		return str_replace('?type=normal', '?width=1920', $avatar);
+	}
 
 	protected function handleGender($gender) {
 		$result = null;
@@ -46,13 +53,4 @@ class FBProvider extends BaseProvider {
 		}
 		return $result;
 	}
-
-	protected function handleBirthDate($date) {
-		return date('d.m.Y', strtotime($date));
-	}
-
-	protected function handleAvatar($avatar) {
-		return str_replace('?type=normal', '?width=1920', $avatar);
-	}
-
 }
