@@ -24,5 +24,4 @@ class ProfileController extends Controller {
 			'user' => User::findOrFail($id)
 		] );
 	}
-
 }
