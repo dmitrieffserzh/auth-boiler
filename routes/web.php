@@ -20,5 +20,14 @@ Route::get ( '/callback/{service}', 'Auth\OAuthController@callback' );
 Route::get('/', 'HomeController@index')->name('home');
 
 
-Route::get('/profile/{id}', 'ProfileController@profile')->name('users.profile');
+//Route::get('/profile/{id}', 'ProfileController@profile')->name('users.profile');
 
+
+
+// USERS
+Route::group([
+	'prefix' => 'users',
+	'name'   => 'users' ], function() {
+	Route::get('/', 'ProfileController@index')->name('users.index');
+	Route::get('/user_id{id}', 'ProfileController@profile')->name('users.profile');
+});

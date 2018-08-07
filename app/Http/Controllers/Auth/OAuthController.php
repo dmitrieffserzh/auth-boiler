@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
+use Image;
 use Socialite;
 use App\User;
-use App\Models\Profile;
 use App\Models\OAuth;
+use App\Models\Profile;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Extension\SocialProviderExtension\SocialProvider;
@@ -106,20 +107,21 @@ class OAuthController extends Controller {
 	}
 
 
-	private function saveAvatar( $imgUrl ) {
+	public function saveAvatar( $imgUrl ) {
 		if ( is_null( $imgUrl ) )
 			return null;
 
-		$filename = $this->nicknameGenerator() . time() . "_" . time() . $this->nicknameGenerator() . ".jpg";
-		file_put_contents(
-			$filename,
-			file_get_contents( $imgUrl )
-		);
+		$filename = time().$this->nicknameGenerator().'_'.$this->nicknameGenerator().time().'.jpg';
+
+		Image::make(file_get_contents( $imgUrl ))->encode('jpg')->save( public_path('uploads/avatars/originals/' . $filename ));
+		Image::make(file_get_contents( $imgUrl ))->encode('jpg')->fit(1000, 1000)->save( public_path('uploads/avatars/b_thumb/' . $filename ));
+		Image::make(file_get_contents( $imgUrl ))->encode('jpg')->fit(400, 400)->save(   public_path('uploads/avatars/n_thumb/' . $filename ));
+		Image::make(file_get_contents( $imgUrl ))->encode('jpg')->fit(150, 150)->save(   public_path('uploads/avatars/m_thumb/' . $filename ));
 
 		return $filename;
 	}
 
-	private function nicknameGenerator() {
+	public function nicknameGenerator() {
 		$alphabet    = '1234567890';
 		$nick        = array();
 		$alphaLength = strlen( $alphabet ) - 1;
@@ -131,7 +133,7 @@ class OAuthController extends Controller {
 		return implode( $nick  );
 	}
 
-	private function passwordGenerator() {
+	public function passwordGenerator() {
 		$alphabet    = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 		$pass        = array();
 		$alphaLength = strlen( $alphabet ) - 1;
@@ -142,6 +144,4 @@ class OAuthController extends Controller {
 
 		return implode( $pass );
 	}
-
-
 }

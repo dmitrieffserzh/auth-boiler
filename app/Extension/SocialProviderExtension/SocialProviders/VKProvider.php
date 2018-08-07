@@ -17,7 +17,7 @@ class VKProvider extends BaseProvider {
 			'location'   => $this->getField($request, 'user', 'city', 'title'),
 			'gender'     => $this->getField($request, 'user', 'sex'),
 			'birthday'   => $this->handleBirthDate( $this->getField($request, 'user', 'bdate')),
-			'avatar'     => $this->handleAvatar(    $this->getField($request, 'avatar')),
+			'avatar'     => $this->handleAvatar(    $this->getField($request, 'user', 'photo_max_orig')),
 		);
 		return $data;
 	}

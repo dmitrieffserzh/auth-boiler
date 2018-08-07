@@ -146,6 +146,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+	    Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -216,6 +217,9 @@ return [
 
 	    // Social auth
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+	    // Image
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

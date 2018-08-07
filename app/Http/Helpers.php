@@ -11,6 +11,33 @@ function is_active( $routeNames ) {
 }
 
 
+// GET AVATAR
+function getAvatar( $size, $image_name ) {
+	if ( $size === 'big' ) {
+		if ( file_exists( public_path() . '/uploads/avatars/b_thumb/' . $image_name ) ) {
+			return '/uploads/avatars/b_thumb/' . $image_name;
+		} else {
+			return '/images/default/default_b_thumb.png';
+		}
+	}
+	if ( $size === 'normal' ) {
+		if ( file_exists( public_path() . '/uploads/avatars/n_thumb/' . $image_name ) ) {
+			return '/uploads/avatars/n_thumb/' . $image_name;
+		} else {
+			return '/images/default/default_n_thumb.png';
+		}
+	}
+	if ( $size === 'micro' ) {
+		if ( file_exists( public_path() . '/uploads/avatars/m_thumb/' . $image_name ) ) {
+			return '/uploads/avatars/m_thumb/' . $image_name;
+		} else {
+			return '/images/default/default_m_thumb.png';
+		}
+	}
+	return 'Такого размера изображения не существует!';
+}
+
+
 //GET IMAGE PATH
 function getImage( $size, $image_name ) {
 	if ( $size === 'original' ) {
