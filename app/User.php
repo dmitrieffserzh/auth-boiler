@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\OAuth;
 use App\Models\Profile;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -38,6 +39,10 @@ class User extends Authenticatable {
 
 	public function oAuth() {
 		return $this->hasOne(OAuth::class);
+	}
+
+	public function isOnline() {
+		return Cache::has( 'user-is-online-' . $this->id );
 	}
 
 	public function profile() {

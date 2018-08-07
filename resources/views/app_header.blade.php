@@ -6,7 +6,7 @@
         </a>
 
 
-    <!--<nav class="main-menu d-none d-md-inline-block">
+    <nav class="main-menu d-none d-md-inline-block">
             <ul class="main-menu__list">
                 <li class="main-menu__item {{ is_active('news.*') }}">
                     <a href="" class="main-menu__link">Новости</a>
@@ -17,15 +17,10 @@
                     </ul>
                 </li>
                 <li class="main-menu__item {{ is_active('users.*') }}">
-                    <a href="" class="main-menu__link">Пользователи</a>
-                    <ul class="main-menu-dropdown">
-                        <li class="main-menu-dropdown__item"><a href="#" class="main-menu-dropdown__link">Dropdown link</a></li>
-                        <li class="main-menu-dropdown__item"><a href="#" class="main-menu-dropdown__link">Dropdown link</a></li>
-                        <li class="main-menu-dropdown__item"><a href="#" class="main-menu-dropdown__link">Dropdown link</a></li>
-                    </ul>
+                    <a href="{{ route('users.index') }}" class="main-menu__link">Пользователи</a>
                 </li>
             </ul>
-        </nav>-->
+        </nav>
 
         @guest
             <div class="auth-menu">
@@ -36,7 +31,7 @@
                            data-url="{{ route('login') }}" data-name="Войти"
                            data-modal-size="modal-sm">
 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round" class="icon icon-user">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -59,7 +54,7 @@
                            document.getElementById('logout-form').submit();" class="auth-menu__link">
 
 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round" class="icon icon-user">
                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>

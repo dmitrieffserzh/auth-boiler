@@ -7,6 +7,7 @@
 @import "./_bootstrap/buttons";
 @import "./_bootstrap/alert";
 @import "./_bootstrap/type";
+@import "./_bootstrap/pagination";
 
 * {
   outline: none !important;
@@ -37,11 +38,96 @@ body {
   //background: linear-gradient(90deg, #00a9e2, #007ae0);
   //background: linear-gradient(to left, #9074fe 0%, #5268d2 100%);
   width: 100%;
-  height: 3rem;
+  //height: 3rem;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
   z-index: 10000;
 }
 
+// MAIN MENU
+.main-menu {
+  display: inline-block;
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  &__item {
+    display: inline-block;
+    position: relative;
+    &:hover {
+      background: rgba(255, 255, 255, 0.09);
+    }
+    &:hover .main-menu-dropdown {
+      display: block !important;
+    }
+    &.active {
+      background: rgba(255, 255, 255, 0.09);
+    }
+  }
+  &__link {
+    display: block;
+    padding: 1rem;
+    font-weight: 500;
+    color: #000;
+    line-height: 1.25rem;
+    &:hover {
+      color: #9d2aff;
+      text-decoration: none;
+    }
+  }
+
+  &-dropdown {
+    display: none;
+    position: absolute;
+    left: 0;
+    padding: 0 0 1rem;
+    margin: 0;
+    background: #fff;
+    min-width: 250px;
+    list-style: none;
+    box-shadow: 0 0.4rem 0.75rem rgba(0, 0, 0, 0.05);
+    &__item {
+      display: block;
+    }
+    &__link {
+      display: block;
+      padding: .3rem .9rem;
+      color: #b1b8cc;
+      &:hover {
+        color: #386898;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+// AUTH MENU
+.auth-menu {
+  display: inline-block;
+  float: right;
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  &__item {
+    display: inline-block;
+  }
+  &__link {
+    display: block;
+    padding: 1rem 0;
+    font-weight: 500;
+    color: #000;
+    line-height: 1.25rem;
+    & span {
+      float: left;
+    }
+    &:hover {
+      color: #9d2aff;
+      text-decoration: none;
+    }
+  }
+}
 
 // FOOTER >> ==========================================================================================================/
 .footer {
@@ -84,26 +170,26 @@ body {
 
 
 // WIDGETS >> =========================================================================================================/
-.auth-menu {
-  display: inline-block;
-  float: right;
-  &__list {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-  &__item {
-    line-height: 1.5rem;
-  }
-  &__link {
-    display: block;
-    padding: 0;
-    color: #000;
-    & span {
-      float: left;
-    }
-  }
-}
+//.auth-menu {
+//  display: inline-block;
+//  float: right;
+//  &__list {
+//    padding: 0;
+//    margin: 0;
+//    list-style: none;
+//  }
+//  &__item {
+//    line-height: 1.5rem;
+//  }
+//  &__link {
+//    display: block;
+//    padding: 0;
+//    color: #000;
+//    & span {
+//      float: left;
+//    }
+//  }
+//}
 .auth {
   &-social {
     display: inline-block;
@@ -123,14 +209,17 @@ body {
 // USERS >> =========================================================================================================/
 .users-list {
   &__item {
-    border-bottom: 1px Solid #f5f5f8;
+    border-top: 1px Solid #f5f5f8;
     padding: .5rem 0;
   }
   &__image {
     display: inline-block;
+    position: relative;
+    float: left;
     margin: 0 .5rem 0 0;
     width: 3.5rem;
     height: 3.5rem;
+    cursor: pointer;
     & img {
       width: 100%;
       height: 100%;
@@ -138,8 +227,26 @@ body {
     }
   }
 }
-
-
+// COMPONENTS >> =========================================================================================================/
+.component {
+  // STATUS
+  &-status {
+    display: inline-block;
+    position: absolute;
+    right: .25rem;
+    bottom: 0.25rem;
+    width: .4rem;
+    height: .4rem;
+    box-shadow: 0 0 0 0.15rem #fff;
+    border-radius: 50%;
+    &--online {
+      background: #09e426;
+    }
+    &--offline {
+      background: #b1c6d2;
+    }
+  }
+}
 
 // HELPERS >> =========================================================================================================/
 .icon {

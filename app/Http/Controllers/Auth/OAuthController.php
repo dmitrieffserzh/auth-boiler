@@ -11,6 +11,7 @@ use App\Models\Profile;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Extension\SocialProviderExtension\SocialProvider;
+use Illuminate\Support\Facades\Redirect;
 
 class OAuthController extends Controller {
 	/*
@@ -44,7 +45,7 @@ class OAuthController extends Controller {
 
 		Auth::login( $authUser, true );
 
-		return view( 'profile' );
+		return Redirect::route('users.profile', $authUser->id);
 	}
 
 

@@ -13,7 +13,10 @@ class Profile extends Model {
 		'name',
 		'birth_date',
 		'gender',
+		'offline_at'
 	];
+
+	protected $dates =['offline_at'];
 
 	// RELATIONS
 	public function user() {

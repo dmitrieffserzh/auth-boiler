@@ -14,7 +14,7 @@ class ProfileController extends Controller {
 
 	public function index() {
 		return view( 'users.index', [
-			'users' => User::paginate( 15 )
+			'users' => User::orderBy('created_at', 'DESC')->paginate( 15 )
 		] );
 	}
 

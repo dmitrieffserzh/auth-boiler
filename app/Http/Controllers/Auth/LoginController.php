@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -28,6 +29,7 @@ class LoginController extends Controller {
 	}
 
 	public function logout() {
+		Cache::forget( 'user-is-online-' . Auth::id() );
 		Auth::logout();
 		Session::flush();
 

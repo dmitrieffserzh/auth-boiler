@@ -91,10 +91,10 @@ function getSex( $sex_int ) {
 
 
 // GET ONLINE ON SEX
-function getOnlineTime( $sex_int, $time ) {
-	if ( $sex_int == 1 ) {
+function getOnlineTime( $gender_int, $time ) {
+	if ( $gender_int == 2 ) {
 		return 'заходил ' . $time;
-	} elseif ( $sex_int == 2 ) {
+	} elseif ( $gender_int == 1 ) {
 		return 'заходила ' . $time;
 	}
 	return $time;

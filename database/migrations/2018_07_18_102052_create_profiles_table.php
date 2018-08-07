@@ -23,6 +23,7 @@ class CreateProfilesTable extends Migration
 	        $table->string('location')->nullable();
 	        $table->text('about')->nullable();
 	        $table->string('avatar')->default('/default_avatar.png');
+	        $table->timestamp('offline_at')->nullable();
             $table->timestamps();
         });
     }

@@ -12,6 +12,8 @@
                 Нет пользователей!
             </div>
         @endforelse
+<br>
+            {{ $users->links() }}
     </div>
 
 @endsection
