@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller {
 
@@ -27,6 +28,9 @@ class ProfileController extends Controller {
 
 
 	public function settings( $id ) {
+		if(Auth::id() != $id)
+			abort(404, 'Page not found!');
+
 		return view( 'users.profile_settings', [
 			'user' => User::findOrFail( $id )
 		] );
