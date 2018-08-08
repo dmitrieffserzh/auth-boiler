@@ -79,30 +79,29 @@ class OAuthController extends Controller {
 
 
 		// CREATE USER
-		$user = User::create( [
-			'nickname'                => ! is_null( $data['nickname'] ) ? $data['nickname'] : time().$this->nicknameGenerator(),
-			'email'                   => $data['email'],
-			'password'                => bcrypt( $this->passwordGenerator() ),
-			'registration_ip'         => request()->ip(),
-			'registration_user_agent' => request()->header( 'User-Agent' ),
-		] );
+		$user                          = new User();
+		$user->nickname                = ! is_null( $data['nickname'] ) ? $data['nickname'] : time().$this->nicknameGenerator();
+		$user->email                   = $data['email'];
+		$user->password                = bcrypt( $this->passwordGenerator() );
+		$user->registration_ip         = request()->ip();
+		$user->registration_user_agent = request()->header( 'User-Agent' );
+		$user->save();
 
-		$user_oauth              = new OAuth();
-		$user_oauth->provider    = $service;
-		$user_oauth->provider_id = $data['user_id'];
-		$user_oauth->token       = $data['token'];
-
-		$user->oAuth()->save( $user_oauth );
+		// CREATE USER OAUTH
+		$oauth                         = new OAuth();
+		$oauth->provider               = $service;
+		$oauth->provider_id            = $data['user_id'];
+		$oauth->token                  = $data['token'];
+		$user->oAuth()->save($oauth);
 
 		// CREATE USER PROFILE
-		$profile             = new Profile();
-		$profile->first_name = $data['first_name'];
-		$profile->last_name  = $data['last_name'];
-		$profile->gender     = $data['gender'];
-		$profile->birthday   = $data['birthday'];
-		$profile->location   = $data['location'];
-		$profile->avatar     = $this->saveAvatar( $data['avatar'] );
-
+		$profile                       = new Profile();
+		$profile->first_name           = $data['first_name'];
+		$profile->last_name            = $data['last_name'];
+		$profile->gender               = $data['gender'];
+		$profile->birthday             = $data['birthday'];
+		$profile->location             = $data['location'];
+		$profile->avatar               = $this->saveAvatar( $data['avatar'] );
 		$user->profile()->save( $profile );
 
 		return $user;
