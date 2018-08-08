@@ -30,4 +30,6 @@ Route::group([
 	'name'   => 'users' ], function() {
 	Route::get('/', 'ProfileController@index')->name('users.index');
 	Route::get('/user_id{id}', 'ProfileController@profile')->name('users.profile');
+	Route::get('/user_id{id}/settings', 'ProfileController@settings')->name('users.profile.settings');
+	Route::post('/user_id{id}/settings', 'ProfileController@settings_store')->name('users.profile.settings_store');
 });

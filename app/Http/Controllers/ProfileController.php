@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use function MongoDB\BSON\toJSON;
 
 class ProfileController extends Controller {
 
@@ -23,5 +24,22 @@ class ProfileController extends Controller {
 		return view( 'users.profile', [
 			'user' => User::findOrFail($id)
 		] );
+	}
+
+
+	public function settings($id) {
+		return view('users.profile_settings', [
+			'user' => User::findOrFail($id)
+		]);
+	}
+
+	public function settings_store(Request $request, $id) {
+
+    	$user = User::findOrFail($id);
+
+		$user->update($request->all());
+
+		return redirect()->back()->with(['status' => 'Профиль успешно обновлен!']);
+
 	}
 }

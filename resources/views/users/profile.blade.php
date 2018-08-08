@@ -10,7 +10,9 @@
                 {{ session('status') }}
             </div>
         @endif
-
+        <div class="d-block">
+            <a href="{{ route('users.profile.settings', $user->id) }}" class="text-muted">Настройки</a>
+        </div>
         <div>
             <strong style="display:block"><strong>@</strong>{{ $user->nickname }}</strong>
             <span>{{ $user->profile->first_name }} </span>
@@ -19,8 +21,11 @@
             <span style="display:block">{{ $user->profile->location }}</span>
         </div>
             <div>
-                <img src="{{ getAvatar('big', $user->profile->avatar) }}" alt="" width="300px">
+                <img src="{{ getAvatar('big', $user->profile->avatar) }}" alt="" width="100px">
             </div>
+        <div>
+            {!! $user->profile->about !!}
+        </div>
 
     </div>
 
