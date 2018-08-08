@@ -34,9 +34,19 @@ class ProfileController extends Controller {
 
 
 	public function settings_store( Request $request, $id ) {
-		$user = User::findOrFail( $id );
-		$user->update( $request->all() );
 
-		return redirect()->back()->with( [ 'status' => 'Профиль успешно обновлен!' ] );
+		$user                      = User::findOrFail( $id );
+		$user->nickname            = $request->nickname;
+		$user->profile->first_name = $request->first_name;
+		$user->profile->last_name  = $request->last_name;
+		$user->profile->birthday   = $request->birthday;
+		$user->profile->gender     = $request->gender;
+		$user->profile->about      = $request->about;
+		$user->push();
+
+		if($user->push())
+			return redirect()->back()->with( [ 'status' => 'Профиль успешно обновлен!' ] );
+
+		return redirect()->back()->with( [ 'status' => 'Ошибка! Данные не обновлены!' ] );
 	}
 }

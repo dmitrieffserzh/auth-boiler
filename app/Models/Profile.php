@@ -10,9 +10,11 @@ class Profile extends Model {
 	protected $table = 'users_profiles';
 
 	protected $fillable = [
-		'name',
-		'birth_date',
+		'first_name',
+		'last_name',
+		'birthday',
 		'gender',
+		'about',
 		'offline_at'
 	];
 
