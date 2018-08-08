@@ -2,8 +2,8 @@
 
 @section('content')
 
-                <div class="card-header">Dashboard</div>
-
+    <h1 class="h5">Главная страница</h1>
+    <hr>
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">

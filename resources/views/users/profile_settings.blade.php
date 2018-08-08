@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="h3">Настройки</div>
+    <h1 class="h5">Настройки</h1>
     <hr>
     <div>
         @if (session('status'))

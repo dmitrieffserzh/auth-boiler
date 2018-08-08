@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="col-md-12">
-                <div>{{ __('Login') }}</div>
+                <h1 class="h5">{{ __('Login') }}</h1>
 
-
+        <hr>
 
 
         @if ( $errors->first('user_exist')  == true )

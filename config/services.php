@@ -37,15 +37,15 @@ return [
 
 	// Social auth
     'facebook' => [
-	    'client_id' => env('FB_CLIENT_ID'),
-	    'client_secret' => env('FB_CLIENT_SECRET'),
-	    'redirect' => env('FB_REDIRECT')
+	    'client_id' => env('FACEBOOK_ID'),
+	    'client_secret' => env('FACEBOOK_SECRET'),
+	    'redirect' => env('FACEBOOK_REDIRECT')
     ],
 
     'vkontakte' => [
-	    'client_id' => env('VKONTAKTE_KEY'),
+	    'client_id' => env('VKONTAKTE_ID'),
 	    'client_secret' => env('VKONTAKTE_SECRET'),
-	    'redirect' => env('VKONTAKTE_REDIRECT_URI')
+	    'redirect' => env('VKONTAKTE_REDIRECT')
     ],
     'odnoklassniki' => [
 	    'client_id' => env('ODNOKLASSNIKI_ID'),

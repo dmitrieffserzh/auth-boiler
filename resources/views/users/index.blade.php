@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <h1 class="h1">П</h1>
-
+    <h1 class="h5">Пользователи</h1>
+    <hr>
     <div class="users-list">
         @forelse ($users as $user)
             @include('users.partials.item_list_users')
