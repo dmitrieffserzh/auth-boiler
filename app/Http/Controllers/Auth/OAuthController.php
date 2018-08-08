@@ -40,12 +40,13 @@ class OAuthController extends Controller {
 
 		$authUser = $this->findOrCreateUser( $data, $service );
 
-		if ( $authUser == false )
+		if ( $authUser == false ) {
 			return redirect( 'login' )->withErrors( [ 'user_exist' => true ] );
+		}
 
 		Auth::login( $authUser, true );
 
-		return Redirect::route('users.profile', $authUser->id);
+		return Redirect::route( 'users.profile', $authUser->id );
 	}
 
 
@@ -55,24 +56,26 @@ class OAuthController extends Controller {
 		                 ->where( 'provider_id', $data['user_id'] )
 		                 ->first();
 
-		if ( $authUser )
+		if ( $authUser ) {
 			return $authUser->user;
+		}
 
 
 		$existEmail = Validator::make( $data, [
 			'email' => 'unique:users',
 		] );
 
-		if ( $existEmail->fails() )
+		if ( $existEmail->fails() ) {
 			return false;
+		}
 
 		$existNickname = Validator::make( $data, [
 			'nickname' => 'unique:users',
 		] );
 
-		if ( $existNickname->fails() )
+		if ( $existNickname->fails() ) {
 			return false;
-
+		}
 
 
 		// CREATE USER
@@ -83,7 +86,6 @@ class OAuthController extends Controller {
 			'registration_ip'         => request()->ip(),
 			'registration_user_agent' => request()->header( 'User-Agent' ),
 		] );
-
 
 		$user_oauth              = new OAuth();
 		$user_oauth->provider    = $service;
@@ -104,20 +106,20 @@ class OAuthController extends Controller {
 		$user->profile()->save( $profile );
 
 		return $user;
-
 	}
 
 
 	public function saveAvatar( $imgUrl ) {
-		if ( is_null( $imgUrl ) )
+		if ( is_null( $imgUrl ) ) {
 			return null;
+		}
 
-		$filename = time().$this->nicknameGenerator().'_'.$this->nicknameGenerator().time().'.jpg';
+		$filename = time() . $this->nicknameGenerator() . '_' . $this->nicknameGenerator() . time() . '.jpg';
 
-		Image::make(file_get_contents( $imgUrl ))->encode('jpg')->save( public_path('uploads/avatars/originals/' . $filename ));
-		Image::make(file_get_contents( $imgUrl ))->encode('jpg')->fit(1000, 1000)->save( public_path('uploads/avatars/b_thumb/' . $filename ));
-		Image::make(file_get_contents( $imgUrl ))->encode('jpg')->fit(400, 400)->save(   public_path('uploads/avatars/n_thumb/' . $filename ));
-		Image::make(file_get_contents( $imgUrl ))->encode('jpg')->fit(150, 150)->save(   public_path('uploads/avatars/m_thumb/' . $filename ));
+		Image::make( file_get_contents( $imgUrl ) )->encode( 'jpg' )->save( public_path( 'uploads/avatars/originals/' . $filename ) );
+		Image::make( file_get_contents( $imgUrl ) )->encode( 'jpg' )->fit( 1000, 1000 )->save( public_path( 'uploads/avatars/b_thumb/' . $filename ) );
+		Image::make( file_get_contents( $imgUrl ) )->encode( 'jpg' )->fit( 400, 400 )->save( public_path( 'uploads/avatars/n_thumb/' . $filename ) );
+		Image::make( file_get_contents( $imgUrl ) )->encode( 'jpg' )->fit( 150, 150 )->save( public_path( 'uploads/avatars/m_thumb/' . $filename ) );
 
 		return $filename;
 	}
@@ -127,11 +129,11 @@ class OAuthController extends Controller {
 		$nick        = array();
 		$alphaLength = strlen( $alphabet ) - 1;
 		for ( $i = 0; $i < 5; $i ++ ) {
-			$n      = rand( 0, $alphaLength );
+			$n       = rand( 0, $alphaLength );
 			$nick [] = $alphabet[ $n ];
 		}
 
-		return implode( $nick  );
+		return implode( $nick );
 	}
 
 	public function passwordGenerator() {
