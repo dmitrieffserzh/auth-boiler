@@ -4650,6 +4650,7 @@ body {
 
 .main-menu__item.active {
   background: rgba(255, 255, 255, 0.09);
+  border-bottom: 1px Solid #9d2aff;
 }
 
 .main-menu__link {

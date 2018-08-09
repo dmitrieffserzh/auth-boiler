@@ -17,3 +17,11 @@
     </div>
 
 @endsection
+
+@section('aside')
+    <ul>
+        <li class="{{ is_active('users.profile.settings') }}">
+            <a href="{{ route('users.profile.settings', $user->id) }}">Личная информация</a>
+        </li>
+    </ul>
+@endsection

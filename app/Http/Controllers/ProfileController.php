@@ -37,9 +37,9 @@ class ProfileController extends Controller {
 	}
 
 
-	public function settings_store( Request $request, $id ) {
+	public function settings_store( Request $request ) {
 
-		$user                      = User::findOrFail( $id );
+		$user                      = User::findOrFail( Auth::id() );
 		$user->nickname            = $request->nickname;
 		$user->profile->first_name = $request->first_name;
 		$user->profile->last_name  = $request->last_name;

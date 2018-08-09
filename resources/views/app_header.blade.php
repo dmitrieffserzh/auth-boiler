@@ -9,7 +9,7 @@
     <nav class="main-menu d-none d-md-inline-block">
             <ul class="main-menu__list">
                 <li class="main-menu__item {{ is_active('news.*') }}">
-                    <a href="" class="main-menu__link">Новости</a>
+                    <a href="{{ route('news.index') }}" class="main-menu__link">Новости</a>
                     <ul class="main-menu-dropdown">
                         <li class="main-menu-dropdown__item"><a href="#" class="main-menu-dropdown__link">Dropdown link</a></li>
                         <li class="main-menu-dropdown__item"><a href="#" class="main-menu-dropdown__link">Dropdown link</a></li>

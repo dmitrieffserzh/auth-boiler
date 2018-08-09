@@ -20,10 +20,6 @@ Route::get ( '/callback/{service}', 'Auth\OAuthController@callback' );
 Route::get('/', 'HomeController@index')->name('home');
 
 
-//Route::get('/profile/{id}', 'ProfileController@profile')->name('users.profile');
-
-
-
 // USERS
 Route::group([
 	'prefix' => 'users',
@@ -33,3 +29,13 @@ Route::group([
 	Route::get('/user_id{id}/settings', 'ProfileController@settings')->name('users.profile.settings');
 	Route::post('/user_id{id}/settings', 'ProfileController@settings_store')->name('users.profile.settings_store');
 });
+
+// NEWS
+Route::group([
+	'prefix'        => 'news'],
+	//'middleware'    => 'filter.view.counts'],
+	function() {
+		Route::get('/',                           [ 'as' => 'news.index',     'uses' => 'NewsController@index' ]);
+		Route::get('{category_slug}',             [ 'as' => 'news.category',  'uses' => 'CategoryController@index' ]);
+		Route::get('{category_slug}/{slug}',      [ 'as' => 'news.show',      'uses' => 'NewsController@show' ]);
+	});
