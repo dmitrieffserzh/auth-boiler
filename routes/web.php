@@ -46,3 +46,7 @@ Route::group([
 		Route::get('{category}',                [ 'as' => 'news.category',                'uses' => 'NewsController@category' ]);
 		Route::get('{category}/{slug}',         [ 'as' => 'news.show',                    'uses' => 'NewsController@show' ]);
 	});
+
+
+// PAGES
+Route::get( '/{slug}',                          [ 'as' => 'page',                         'uses' => 'PageController@getPage' ]);
