@@ -10,7 +10,7 @@ Relation::morphMap([
 	'category'  => Category::class,
 ]);
 
-class Seo extends Model {
+class MetaTags extends Model {
 
 
 

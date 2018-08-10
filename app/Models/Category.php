@@ -29,12 +29,16 @@ class Category extends Model {
 	}
 
 	// RELATIONS
-	public function getNews() {
-		return $this->hasMany(News::class, 'category_id');
+	public function parent() {
+		return $this->hasMany(self::class, 'parent_id');
 	}
 
 	public function children() {
 		return $this->hasMany(self::class, 'parent_id');
+	}
+
+	public function getNews() {
+		return $this->hasMany(News::class, 'category_id');
 	}
 
 	public function getSeoCat() {

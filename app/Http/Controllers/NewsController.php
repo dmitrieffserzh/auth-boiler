@@ -3,36 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
-use App\Models\Seo;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller {
 
+	public function __construct() {
+		//$this->middleware('auth');
+	}
+
 
 	public function index() {
-
-		$title[] = 'Не работает заголовок';
-
-		array_push($this->title,'fdfdf');
-
-		return view('news.index', [
-			'news' => News::latest()->paginate(15),
-			'seo' => Seo::where('content_type', '=', 'news')->where('content_id', '=', '0')->firstOrFail()
+		return view( 'news.index', [
+			'news' => News::latest()->paginate( 15 ),
 		]);
 	}
 
 
-	public function show($category_slug, $slug) {
-		$news = News::where('slug', $slug)->firstOrFail();
-		if ($news->getCategory->slug != $category_slug) {
-			abort(404);
+	public function show( $category, $slug ) {
+		$news = News::where( 'slug', $slug )->firstOrFail();
+		if ( $news->getCategory->slug != $category ) {
+			abort( 404 );
 		}
 
-
 		//Event::fire( 'news.show', $news );
-		return view('news.show', [
+		return view( 'news.show', [
 			'news' => $news,
-			'seo' => Seo::with('seoNested')->where('content_id', '=', 0)->firstOrFail()
 		]);
 	}
+
+
+	public function category( $category ) {
+		return view( 'news.index', [
+			'news' => Category::where( 'slug', $category )->firstOrFail()->getNews()->latest()->paginate( 15 ),
+		]);
+	}
+
+
+//	public function categories($category_slug, Request $request) {
+//
+//		$categories = explode('/', $category_slug);
+//
+//		//$postSlug = array_pop($categories);
+//		$category = Category::whereIn('slug', $categories)->get();
+//		$posts = $category->loadMissing('getNews');
+//
+//		foreach ($posts as $post) {
+//			foreach ($post->getNews as $news) {
+//				print_r($news);
+//			}
+//		}
+//				dd($request);
+//	}
+
+
 }

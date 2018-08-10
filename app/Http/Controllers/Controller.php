@@ -11,14 +11,4 @@ class Controller extends BaseController {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-	public $title = [];
-	public $description = 'desc';
-
-    public function __construct() {
-
-    	array_push($this->title, env('APP_NAME'));
-
-    	view()->share('title', $this->title);
-    	view()->share('description', $this->description );
-    }
 }

@@ -1,7 +1,6 @@
 @extends('app_sidebar')
 {{-- META --}}
 
-@include('components.seo.meta_tags', ['data'=>$seo])
 @section('content')
 
     <section class="section">

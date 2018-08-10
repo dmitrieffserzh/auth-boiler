@@ -21,8 +21,12 @@ class ProfileController extends Controller {
 
 
 	public function profile( $id ) {
+
+		$user = User::findOrFail( $id );
+
+
 		return view( 'users.profile', [
-			'user' => User::findOrFail( $id )
+			'user' => $user
 		] );
 	}
 
@@ -31,8 +35,11 @@ class ProfileController extends Controller {
 		if(Auth::id() != $id)
 			abort(404, 'Page not found!');
 
+
+		$user = User::findOrFail( $id );
+
 		return view( 'users.profile_settings', [
-			'user' => User::findOrFail( $id )
+			'user' => $user
 		] );
 	}
 
