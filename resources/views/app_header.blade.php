@@ -19,6 +19,14 @@
                 <li class="main-menu__item {{ is_active('users.*') }}">
                     <a href="{{ route('users.index') }}" class="main-menu__link">Пользователи</a>
                 </li>
+                <li class="main-menu__item {{ is_active('page') }}">
+                    <a href="{{ route('page', 'contacts') }}" class="main-menu__link">Контакты</a>
+                    <ul class="main-menu-dropdown">
+                        <li class="main-menu-dropdown__item"><a href="{{ route('page', 'about-us') }}" class="main-menu-dropdown__link">О нас</a></li>
+                        <li class="main-menu-dropdown__item"><a href="#" class="main-menu-dropdown__link">Dropdown link</a></li>
+                        <li class="main-menu-dropdown__item"><a href="#" class="main-menu-dropdown__link">Dropdown link</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
 
