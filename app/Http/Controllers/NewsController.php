@@ -20,6 +20,13 @@ class NewsController extends Controller {
 	}
 
 
+	public function category( $category ) {
+		return view( 'news.index', [
+			'news' => Category::where( 'slug', $category )->firstOrFail()->getNews()->latest()->paginate( 15 ),
+		]);
+	}
+
+
 	public function show( $category, $slug ) {
 		$news = News::where( 'slug', $slug )->firstOrFail();
 		if ( $news->getCategory->slug != $category ) {
@@ -33,11 +40,7 @@ class NewsController extends Controller {
 	}
 
 
-	public function category( $category ) {
-		return view( 'news.index', [
-			'news' => Category::where( 'slug', $category )->firstOrFail()->getNews()->latest()->paginate( 15 ),
-		]);
-	}
+
 
 
 //	public function categories($category_slug, Request $request) {
