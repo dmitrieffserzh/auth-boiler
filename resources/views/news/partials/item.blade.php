@@ -8,7 +8,7 @@
                     position-absolute abs-pos
                     @endif
                     ">
-                <a href="{{ route('news.show', ['category_slug'=>$item->getCategory->slug, 'slug'=>$item->slug]) }}"
+                <a href="{{ route('news.show', ['category'=>$item->getCategory->slug, 'slug'=>$item->slug]) }}"
                    class="h6 d-block text-dark font-weight-bold">{{$item->title or ""}}</a>
                 <h6 class="d-inline-block small text-light p-1" style="background: {{ $item->getCategory->color }}"><a
                             href="{{ route('news.category', $item->getCategory->slug ) }}"
