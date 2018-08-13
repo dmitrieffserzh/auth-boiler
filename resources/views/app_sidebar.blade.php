@@ -14,6 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('meta_tags')
+    <link href='{{ route('service.rss') }}' rel='alternate' title='RSS' type='application/rss+xml'/>
+    <link href='{{ route('service.sitemap') }}' rel='alternate' title='Sitemap' type='application/rss+xml'/>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('add_styles')
     <script src="{{ asset('js/app.js') }}"></script>

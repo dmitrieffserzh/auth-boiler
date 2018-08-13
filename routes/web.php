@@ -47,8 +47,9 @@ Route::group([
 		Route::get('{category}/{slug}',         [ 'as' => 'news.show',                    'uses' => 'NewsController@show' ]);
 	});
 
-// RSS FEEDS
-Route::get( '/feed.rss',                        [ 'as' => 'rss.turbo',                    'uses' => 'RssController@rssTurbo' ]);
+// SERVICE
+Route::get( '/feed.rss',                        [ 'as' => 'service.rss',                    'uses' => 'ServiceController@rssTurbo' ]);
+Route::get( '/sitemap.xml',                     [ 'as' => 'service.sitemap',                'uses' => 'ServiceController@sitemap' ]);
 
 // PAGES
 Route::get( '/{slug}',                          [ 'as' => 'page',                         'uses' => 'PageController@getPage' ]);

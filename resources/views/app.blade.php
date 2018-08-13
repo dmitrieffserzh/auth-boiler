@@ -8,6 +8,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="description" content="">
+    <link href='{{ route('service.rss') }}' rel='alternate' title='RSS' type='application/rss+xml'/>
+    <link href='{{ route('service.sitemap') }}' rel='alternate' title='Sitemap' type='application/rss+xml'/>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('add_styles')
