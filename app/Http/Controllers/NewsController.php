@@ -34,9 +34,10 @@ class NewsController extends Controller {
 		}
 
 		//Event::fire( 'news.show', $news );
-		return view( 'news.show', [
+		$content = view( 'news.show', [
 			'news' => $news,
 		]);
+		return response($content)->header('Last-Modified', $news->updated_at->tz('GMT')->toAtomString());
 	}
 
 
