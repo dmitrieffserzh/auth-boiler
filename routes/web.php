@@ -48,8 +48,8 @@ Route::group([
 	});
 
 // SERVICE
-Route::get( '/feed.rss',                        [ 'as' => 'service.rss',                    'uses' => 'ServiceController@rssTurbo' ]);
-Route::get( '/sitemap.xml',                     [ 'as' => 'service.sitemap',                'uses' => 'ServiceController@sitemap' ]);
+Route::get( '/feed.rss',                        [ 'as' => 'service.rss',                  'uses' => 'ServiceController@rssTurbo' ]);
+Route::get( '/sitemap.xml',                     [ 'as' => 'service.sitemap',              'uses' => 'ServiceController@sitemap' ]);
 
 // PAGES
 Route::get( '/{slug}',                          [ 'as' => 'page',                         'uses' => 'PageController@getPage' ]);
