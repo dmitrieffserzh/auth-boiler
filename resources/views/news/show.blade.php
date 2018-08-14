@@ -22,6 +22,7 @@
         <div class="col">
             <div class="row">
                 @include('components.views.view_count', ['content'=>$news])
+                @include('components.likes.like', ['content'=>$news])
             </div>
         </div>
         @endsection

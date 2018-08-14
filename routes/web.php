@@ -51,6 +51,9 @@ Route::group([
 Route::get( '/feed.rss',                        [ 'as' => 'service.rss',                  'uses' => 'ServiceController@rssTurbo' ]);
 Route::get( '/sitemap.xml',                     [ 'as' => 'service.sitemap',              'uses' => 'ServiceController@sitemap' ]);
 
+// LIKE
+Route::post('like_handler',                     ['as' => 'like_handler',                  'uses' => 'LikeController@like']);
+
 // PAGES
 Route::get( '/{slug}',                          [ 'as' => 'page',                         'uses' => 'PageController@getPage' ]);
 

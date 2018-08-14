@@ -13,12 +13,23 @@
                 <h6 class="d-inline-block small text-light p-1" style="background: {{ $item->getCategory->color }}"><a
                             href="{{ route('news.category', $item->getCategory->slug ) }}"
                             class="text-light p-1 font-weight-bold text-uppercase">{{ $item->getCategory->title }}</a></h6>
-
+                <br>
                 <a href="{{ route('users.profile', $item->getAuthor->id) }}" class="author-widget d-inline-block text-dark" title="Автор {{ $item->getAuthor->nickname }}">
                     <img src="{{ getAvatar('micro', $item->getAuthor->profile->avatar) }}" style="height: 23px;width: 23px" class="rounded-circle" alt="{{ $item->getAuthor->nickname }}">
                     {{ $item->getAuthor->nickname }}
                 </a>
+                <div class="col">
+                    <div class="row">
+                    <p>{!! strip_tags(str_limit($item->content, 160,'...')) !!}</p>
+                    </div>
+                </div>
 
+                <div class="col">
+                    <div class="row">
+                        @include('components.views.view_count', ['content'=>$item])
+                        @include('components.likes.like', ['content'=>$item])
+                    </div>
+                </div>
 
             </div>
         </div>

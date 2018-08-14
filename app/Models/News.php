@@ -32,7 +32,10 @@ class News extends Model {
 		return 'slug';
 	}
 
-
+	public function getLikedAttribute() {
+		$like = $this->like()->where('user_id', Auth::id())->first();
+		return !is_null($like);
+	}
 
 	// RELATIONS
 	public function getAuthor() {
@@ -45,5 +48,9 @@ class News extends Model {
 
 	public function getSeo() {
 		return $this->morphMany(Seo::class, 'content');
+	}
+
+	public function like() {
+		return $this->morphMany(Like::class, 'content');
 	}
 }
