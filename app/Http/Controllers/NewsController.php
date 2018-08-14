@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 
 class NewsController extends Controller {
 
@@ -33,7 +34,7 @@ class NewsController extends Controller {
 			abort( 404 );
 		}
 
-		//Event::fire( 'news.show', $news );
+		Event::fire( 'news.show', $news );
 		$content = view( 'news.show', [
 			'news' => $news,
 		]);

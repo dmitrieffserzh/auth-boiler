@@ -4825,6 +4825,31 @@ body {
   background: #b1c6d2;
 }
 
+.component-views {
+  display: inline-block;
+  line-height: 0;
+}
+
+.component-views__count {
+  display: inline-block;
+  float: right;
+  padding: 0 .3rem;
+  min-width: 40px;
+  font-family: Arial, monospace;
+  font-size: 14px;
+  color: #b6bcc7;
+  text-align: left;
+  vertical-align: middle;
+  line-height: 1.4rem;
+}
+
+.component-views__icon {
+  display: inline-block;
+  fill: none;
+  stroke: #cad0dc !important;
+  overflow: hidden;
+}
+
 .icon {
   float: left;
 }
@@ -4832,6 +4857,10 @@ body {
 @media (max-width: 800px) {
   #content .main {
     border: none;
+  }
+
+  .aside {
+    border-top: 1px Solid #f5f5f8;
   }
 }
 

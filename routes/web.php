@@ -39,8 +39,8 @@ Route::group([
 
 // NEWS
 Route::group([
-	'prefix'        => 'news'],
-	//'middleware'    => 'filter.view.counts'],
+	'prefix'        => 'news',
+	'middleware'    => 'filter.view.counts'],
 	function() {
 		Route::get('/',                         [ 'as' => 'news.index',                   'uses' => 'NewsController@index' ]);
 		Route::get('{category}',                [ 'as' => 'news.category',                'uses' => 'NewsController@category' ]);

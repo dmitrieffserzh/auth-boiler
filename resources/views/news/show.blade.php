@@ -14,50 +14,55 @@
         @endif
 
         <div class="col">
-            <h1>{{ $news->title }}</h1>
-            <h1></h1>
-            {!! $news->content !!}
+            <div class="row">
+                <h1 class="h3">{{ $news->title }}</h1>
+                {!! $news->content !!}
+            </div>
         </div>
+        <div class="col">
+            <div class="row">
+                @include('components.views.view_count', ['content'=>$news])
+            </div>
+        </div>
+        @endsection
 
-@endsection
 
+        @section('aside')
+            <h6 class="text-uppercase border-bottom border-gray pb-2 text-primary">Боковая колонка</h6>
+            <ul class="aside-menu">
+                <li><a href="{{ route('users.index') }}">Пользователи</a></li>
+                <li><a href="{{ route('news.index') }}">Новости</a></li>
 
-@section('aside')
-    <h6 class="text-uppercase border-bottom border-gray pb-2 text-primary">Боковая колонка</h6>
-    <ul class="aside-menu">
-        <li><a href="{{ route('users.index') }}">Пользователи</a></li>
-        <li><a href="{{ route('news.index') }}">Новости</a></li>
+            @if(Auth::check())
+                {{--@if( Auth::user()->role == 'editor' || Auth::user()->is_admin())--}}
+                {{--<li><a href="{{ route('admin.dashboard') }}">Панель управления</a></li>--}}
+                {{--@endif--}}
+            @endif
+            <!-- Authentication Links -->
+                @if (Auth::guest())
+                    <li><a href="{{ route('login') }}" class="ajax-modal main-menu__link" data-toggle="modal"
+                           data-url="{{ route('login') }}" data-name="Войти" data-modal-size="modal-sm">Войти</a></li>
+                    <li><a href="{{ route('register') }}">Регистрация</a></li>
+                @else
+                    <li>
+                        {{--<a href="{{ route('users.profile', Auth::id()) }}">--}}
+                        {{--{{ Auth::user()->nickname }}--}}
+                        {{--</a>--}}
 
-    @if(Auth::check())
-        {{--@if( Auth::user()->role == 'editor' || Auth::user()->is_admin())--}}
-        {{--<li><a href="{{ route('admin.dashboard') }}">Панель управления</a></li>--}}
-        {{--@endif--}}
-    @endif
-    <!-- Authentication Links -->
-        @if (Auth::guest())
-            <li><a href="{{ route('login') }}" class="ajax-modal main-menu__link" data-toggle="modal"
-                   data-url="{{ route('login') }}" data-name="Войти" data-modal-size="modal-sm">Войти</a></li>
-            <li><a href="{{ route('register') }}">Регистрация</a></li>
-        @else
-            <li>
-                {{--<a href="{{ route('users.profile', Auth::id()) }}">--}}
-                {{--{{ Auth::user()->nickname }}--}}
-                {{--</a>--}}
+                    </li>
 
-            </li>
-
-            <li>
-                <a href="{{ route('logout') }}"
-                   onclick="event.preventDefault();
+                    <li>
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();">
-                    Выйти
-                </a>
+                            Выйти
+                        </a>
 
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
-            </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
 
-        @endif
-    </ul>
+                @endif
+            </ul>
 @endsection

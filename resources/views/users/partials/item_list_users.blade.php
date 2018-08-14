@@ -1,7 +1,7 @@
 <div class="users-list__item">
     <div class="users-list__image" onclick="location.href='{{ route('users.profile', $user->id) }}'">
         <img src="{{ getAvatar('micro', $user->profile->avatar) }}" alt="{{ $user->nickname }}">
-        @if( $user->isOnline() )
+        @if( $user->is_online() )
             <span class="component-status component-status--online"></span>
         @else
             <span class="component-status component-status--offline"></span>
@@ -21,7 +21,7 @@
         @endif
     </div>
     <strong></strong>
-    @if($user->isOnline())
+    @if($user->is_online())
         <span class="d-block text-muted small lh-125 font-weight-light font-monospace">
             онлайн
         </span>

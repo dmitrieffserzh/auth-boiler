@@ -30,6 +30,22 @@ class User extends Authenticatable {
 
 
 
+    // FUNCTIONS
+	// IS ADMIN
+	public function is_admin() {
+		if ( $this->role == 'admin' ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// IS ONLINE
+	public function is_online() {
+		return Cache::has( 'user-is-online-' . $this->id );
+	}
+
+
     // RELATIONS
 	public function getProvider($provider) {
 		return $this->providers->first(function (OAuth $item) use ($provider) {
@@ -39,10 +55,6 @@ class User extends Authenticatable {
 
 	public function oAuth() {
 		return $this->hasOne(OAuth::class);
-	}
-
-	public function isOnline() {
-		return Cache::has( 'user-is-online-' . $this->id );
 	}
 
 	public function profile() {
