@@ -8,6 +8,9 @@
 @import "./_bootstrap/alert";
 @import "./_bootstrap/type";
 @import "./_bootstrap/pagination";
+@import "./_bootstrap/modal";
+@import "./_bootstrap/dropdown";
+@import "./_bootstrap/close";
 
 * {
   outline: none !important;
@@ -39,7 +42,7 @@ body {
   width: 100%;
   height: 3rem;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
-  z-index: 10000;
+  z-index: 100;
   &__brand {
     display: inline-block;
     line-height: 3rem;
