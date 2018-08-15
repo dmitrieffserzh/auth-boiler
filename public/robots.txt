@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+sitemap: https://womensay.ru/sitemap.xml
+host: https://womensay.ru

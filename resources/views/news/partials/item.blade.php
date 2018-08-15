@@ -26,6 +26,7 @@
 
                 <div class="col">
                     <div class="row">
+                        @include('components.com_count.com_count', ['content'=>$news])
                         @include('components.views.view_count', ['content'=>$item])
                         @include('components.likes.like', ['content'=>$item])
                     </div>

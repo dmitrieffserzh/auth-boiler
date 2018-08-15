@@ -5308,6 +5308,31 @@ body {
   background: #b1c6d2;
 }
 
+.component-comments-count {
+  display: inline-block;
+  line-height: 0;
+}
+
+.component-comments-count__count {
+  display: inline-block;
+  float: right;
+  padding: 0 .3rem;
+  min-width: 40px;
+  font-family: Arial, monospace;
+  font-size: 14px;
+  color: #b6bcc7;
+  text-align: left;
+  vertical-align: middle;
+  line-height: 1.4rem;
+}
+
+.component-comments-count__icon {
+  display: inline-block;
+  fill: none;
+  stroke: #cad0dc !important;
+  overflow: hidden;
+}
+
 .component-views {
   display: inline-block;
   line-height: 0;
@@ -5335,6 +5360,7 @@ body {
 
 .component-likes {
   display: inline-block;
+  float: right;
   line-height: 0;
 }
 
@@ -5392,6 +5418,7 @@ body {
     top: 0;
     left: -75%;
     width: 70%;
+    padding: 3rem .7rem 0;
     background: #fff;
     -webkit-transition: left 0.3s;
     transition: left 0.3s;
@@ -5409,6 +5436,78 @@ body {
 }
 
 @media (max-width: 800px) {
+  .main-menu__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 100%;
+  }
+
+  .main-menu__item {
+    display: block;
+    position: relative;
+    text-align: left;
+  }
+
+  .main-menu__item:hover {
+    background: rgba(255, 255, 255, 0.09);
+  }
+
+  .main-menu__item:hover .main-menu-dropdown {
+    display: block !important;
+  }
+
+  .main-menu__item.active {
+    background: rgba(255, 255, 255, 0.09);
+    border-bottom: none;
+  }
+
+  .main-menu__item.active .main-menu__link {
+    color: #9d2aff;
+  }
+
+  .main-menu__link {
+    display: block;
+    padding: 1rem;
+    font-size: 20px;
+    font-weight: 500;
+    color: #000;
+    line-height: .5rem;
+  }
+
+  .main-menu__link:hover {
+    color: #9d2aff;
+    text-decoration: none;
+  }
+
+  .main-menu-dropdown {
+    display: block;
+    position: relative;
+    padding: 0 0 1rem;
+    margin: 0;
+    background: #fff;
+    width: 100%;
+    list-style: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+
+  .main-menu-dropdown__item {
+    display: block;
+  }
+
+  .main-menu-dropdown__link {
+    display: block;
+    padding: .3rem 1rem;
+    color: #b1b8cc;
+    line-height: 1rem;
+  }
+
+  .main-menu-dropdown__link:hover {
+    color: #386898;
+    text-decoration: none;
+  }
+
   .open-menu {
     left: 0 !important;
   }
