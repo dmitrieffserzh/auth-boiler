@@ -46,8 +46,16 @@ body {
   &__brand {
     display: inline-block;
     line-height: 3rem;
-    color: #000;
     font-size: 20px;
+    font-weight: 900;
+    cursor: pointer;
+    text-align: center;
+    &-first {
+      color: #000;
+    }
+    &-last {
+      color: #ff0074;
+    }
   }
 }
 
@@ -109,6 +117,31 @@ body {
     }
   }
 }
+.button-menu {
+  position: relative;
+  display: none;
+  float: left;
+  background: transparent;
+  border: none;
+  padding: .8rem 0;
+  margin: 0;
+  z-index: 130;
+  @include transition(all .3s);
+
+  & .icon-bar {
+    display: block;
+    background: #000;
+    margin: 4px 0 4px;
+    width: 25px;
+    height: 2px;
+  }
+  &--open {
+    // transform: rotate(90deg);
+  }
+}
+
+
+
 
 // AUTH MENU
 .auth-menu {
@@ -330,6 +363,22 @@ body {
 
 // MEDIA QUERIES >> ===================================================================================================/
 @media (max-width: 800px) {
+  // header
+  .header {
+    text-align: center;
+    &__brand {
+      display: inline-block;
+      color: #000;
+      font-size: 20px;
+    }
+  }
+  .main-menu {
+    display: none;
+  }
+  .button-menu {
+    display: inline-block;
+  }
+
   //.no-margin {
   //  margin: 0 !important;
   //}

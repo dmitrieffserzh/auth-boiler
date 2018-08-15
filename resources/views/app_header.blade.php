@@ -1,10 +1,23 @@
 <header class="header">
     <div class="container">
-        <a class="header__brand" href="{{ url('/') }}">
-            {{--{{ config('app.name', 't-kalach') }}--}}
-            LINKTOME
-        </a>
 
+        <button type="button" id="button-menu" class="button-menu">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        @if(request()->route()->getName() == 'home')
+            <div class="header__brand" onclick="location.reload();">
+                <span class="header__brand-first">Women</span>
+                <span class="header__brand-last">SAY!</span>
+            </div>
+        @else
+            <a class="header__brand" href="{{ url('/') }}">
+                <span class="header__brand-first">Women</span>
+                <span class="header__brand-last">SAY!</span>
+            </a>
+        @endif
 
     <nav class="main-menu">
             <ul class="main-menu__list">

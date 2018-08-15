@@ -38,7 +38,17 @@
                                data-toggle="modal"
                                data-name="Пожаловаться"
                                data-content="<p>Эта хренотень реально нарушает Ваши авторские права или оскорбляет Вас?</p>"
-                               data-modal-size="modal-sm">Пожаловаться</a>
+                               data-modal-size="modal-sm">Редактировать</a>
+                                <a class="ajax dropdown-item" href="#"
+                                   data-toggle="modal"
+                                   data-name="Пожаловаться"
+                                   data-content="<p>Эта хренотень реально нарушает Ваши авторские права или оскорбляет Вас?</p>"
+                                   data-modal-size="modal-sm">Удалить</a>
+                                <a class="ajax dropdown-item" href="#"
+                                   data-toggle="modal"
+                                   data-name="Пожаловаться"
+                                   data-content="<p>Эта хренотень реально нарушает Ваши авторские права или оскорбляет Вас?</p>"
+                                   data-modal-size="modal-sm">Пожаловаться</a>
                         </div>
                     </div>
 
