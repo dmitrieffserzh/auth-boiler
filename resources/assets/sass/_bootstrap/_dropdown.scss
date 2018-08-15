@@ -30,7 +30,7 @@
   background-clip: padding-box;
   //border: $dropdown-border-width solid $dropdown-border-color;
   @include border-radius($dropdown-border-radius);
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
   // @include box-shadow($dropdown-box-shadow);
 }
 

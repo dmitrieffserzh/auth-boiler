@@ -15,7 +15,7 @@
 
         <div class="col">
             <div class="row">
-                <h1 class="h3">{{ $news->title }}</h1>
+                <h1 class="h5">{{ $news->title }}</h1>
     @if(Auth::check())
                     <div class="component service-menu">
                         <button class="service-menu__button" type="button" id="service-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
