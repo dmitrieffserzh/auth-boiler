@@ -62,13 +62,14 @@
                     </button>
 
                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                        {{ __('Forgot Your Password?') }}
+                        {{ __('Забыли пароль?') }}
                     </a>
                 </div>
             </div>
         </form>
 
     </div>
+    <br>
     <div class="col">
         <div class="row">
             <a href="{{ route('oauth.login', 'facebook') }}" class="auth-social">
