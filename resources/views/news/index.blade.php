@@ -2,7 +2,8 @@
 {{-- META --}}
 
 @section('content')
-
+    <h1 class="h5">Новости</h1>
+    <hr>
     <section class="section">
         @if(Session::has('success'))
             <div class="alert alert-success alert-dismissible fade show">
@@ -37,16 +38,15 @@
     @endif
     <!-- Authentication Links -->
         @if (Auth::guest())
-            <li><a href="{{ route('login') }}" class="ajax-modal main-menu__link" data-toggle="modal"
+            <li><a href="{{ route('login') }}" class="" data-toggle="modal"
                    data-url="{{ route('login') }}" data-name="Войти" data-modal-size="modal-sm">Войти</a></li>
             <li><a href="{{ route('register') }}">Регистрация</a></li>
         @else
-            <li>
+
                 {{--<a href="{{ route('users.profile', Auth::id()) }}">--}}
                 {{--{{ Auth::user()->nickname }}--}}
                 {{--</a>--}}
 
-            </li>
 
             <li>
                 <a href="{{ route('logout') }}"

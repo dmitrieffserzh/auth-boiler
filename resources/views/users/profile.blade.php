@@ -5,14 +5,16 @@
     <h1 class="h5">Профиль</h1>
     <hr>
     <div class="card-body">
-        @if (session('status'))
+        @if(session('status'))
             <div class="alert alert-success" role="alert">
                 {{ session('status') }}
             </div>
         @endif
-        <div class="d-block">
-            <a href="{{ route('users.profile.settings', $user->id) }}" class="text-muted">Настройки</a>
-        </div>
+        @if(Auth::id() == $user->id)
+            <div class="d-block">
+                <a href="{{ route('users.profile.settings', $user->id) }}" class="text-muted">Настройки</a>
+            </div>
+            @endif
         <div>
             <strong style="display:block"><strong>@</strong>{{ $user->nickname }}</strong>
             <span>{{ $user->profile->first_name }} </span>
@@ -21,7 +23,7 @@
             <span style="display:block">{{ $user->profile->location }}</span>
         </div>
             <div>
-                <img src="{{ getAvatar('big', $user->profile->avatar) }}" alt="" width="100px">
+                <img src="{{ getAvatar('big', $user->profile->avatar) }}" alt="" width="200px">
             </div>
         <div>
             {!! $user->profile->about !!}
@@ -45,16 +47,14 @@
     @endif
     <!-- Authentication Links -->
         @if (Auth::guest())
-            <li><a href="{{ route('login') }}" class="ajax-modal main-menu__link" data-toggle="modal"
+            <li><a href="{{ route('login') }}" class="" data-toggle="modal"
                    data-url="{{ route('login') }}" data-name="Войти" data-modal-size="modal-sm">Войти</a></li>
             <li><a href="{{ route('register') }}">Регистрация</a></li>
         @else
-            <li>
                 {{--<a href="{{ route('users.profile', Auth::id()) }}">--}}
                 {{--{{ Auth::user()->nickname }}--}}
                 {{--</a>--}}
 
-            </li>
 
             <li>
                 <a href="{{ route('logout') }}"

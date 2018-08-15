@@ -19,7 +19,7 @@
             </a>
         @endif
 
-    <nav class="main-menu">
+    <nav id="menu-block" class="main-menu">
             <ul class="main-menu__list">
                 <li class="main-menu__item {{ is_active('news.*') }}">
                     <a href="{{ route('news.index') }}" class="main-menu__link">Новости</a>
@@ -58,7 +58,7 @@
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
                             </svg>
-                            <span class="d-none d-md-block float-left">
+                            <span class="d-none d-md-inline-block">
                                 {{ __('Войти') }}
                             </span>
                         </a>
@@ -82,7 +82,7 @@
                                 <polyline points="16 17 21 12 16 7"></polyline>
                                 <line x1="21" y1="12" x2="9" y2="12"></line>
                             </svg>
-                            <span class="d-none d-md-block float-left">
+                            <span class="d-none d-md-inline-block">
                             {{ __('Выйти') }}
                             </span>
                         </a>
@@ -107,26 +107,6 @@
             <input type="text" class="search__form rounded">
         </div>-->
 
-    <!--
-        <nav class="main-menu">
-            <ul class="main-menu__list">
-                <li class="main-menu__item {{ is_active('news.*') }}">
-                    <a href="" class="main-menu__link">Новости</a>
-                </li>
-                <li class="main-menu__item">
-                    <a href="#" class="main-menu__link">События</a>
-                </li>
-                <li class="main-menu__item">
-                    <a href="#" class="main-menu__link">Ссылка</a>
-                </li>
-                <li class="main-menu__item">
-                    <a href="#" class="main-menu__link">Ссылка</a>
-                </li>
-                <li class="main-menu__item {{ is_active('users.*') }}">
-                    <a href="#" class="main-menu__link">Пользователи</a>
-                </li>
-            </ul>
-        </nav>
--->
     </div>
+    <div class="modal-bg"></div>
 </header>
