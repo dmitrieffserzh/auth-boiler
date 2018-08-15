@@ -68,10 +68,12 @@
                     </form>
 
 </div>
-<div class="col-md-12">
-                <a href="{{ route('oauth.login', 'facebook') }}" class="auth-social">Facebook</a>
-                <a href="{{ route('oauth.login', 'vkontakte') }}" class="auth-social">Вконтакте</a>
-                <a href="{{ route('oauth.login', 'odnoklassniki') }}" class="auth-social">Одноклассники</a>
-                <a href="{{ route('oauth.login', 'instagram') }}" class="auth-social">Instagram</a>
+<div class="col">
+    <div class="row">
+                    <a href="{{ route('oauth.login', 'facebook') }}" class="auth-social">Facebook</a>
+                    <a href="{{ route('oauth.login', 'vkontakte') }}" class="auth-social">Вконтакте</a>
+                    <a href="{{ route('oauth.login', 'odnoklassniki') }}" class="auth-social">Одноклассники</a>
+                    <a href="{{ route('oauth.login', 'instagram') }}" class="auth-social">Instagram</a>
+    </div>
 </div>
 @endsection
