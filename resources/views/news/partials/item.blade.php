@@ -3,7 +3,7 @@
 
     <div class="@if( $count == 99 || $count == 99 || $count == 99 ) col-lg-8 @else col-lg-6 @endif">
         <div class="mb-4 bg-white item-test">
-            <div class="p-3
+            <div class="
                     @if( $count == 99 || $count == 99 || $count == 99 )
                     position-absolute abs-pos
                     @endif
