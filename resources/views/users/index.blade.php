@@ -32,8 +32,7 @@
     @endif
     <!-- Authentication Links -->
         @if (Auth::guest())
-            <li><a href="{{ route('login') }}" class="" data-toggle="modal"
-                   data-url="{{ route('login') }}" data-name="Войти" data-modal-size="modal-sm">Войти</a></li>
+            <li><a href="{{ route('login') }}">Войти</a></li>
             <li><a href="{{ route('register') }}">Регистрация</a></li>
         @else
                 {{--<a href="{{ route('users.profile', Auth::id()) }}">--}}
