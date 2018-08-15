@@ -6,7 +6,8 @@
              alt="{{ Auth::user()->nickname }}">
     </a>
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user-dropdown" style="line-height: initial;">
-        <!--<div class="dropdown-header">{{ Auth::user()->nickname }}</div>-->
+        <div class="dropdown-header"><strong style="display:block"><strong>@</strong>{{ Auth::user()->nickname }}</strong></div>
+        <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{ route('users.profile', Auth::id()) }}">{{ __('Мой профиль') }}</a>
         <a class="dropdown-item" href="{{ route('users.profile', Auth::id()) }}">{{ __('Мои подписчики') }}</a>
         <a class="dropdown-item" href="{{ route('users.profile', Auth::id()) }}">{{ __('Мои подписки') }}</a>
